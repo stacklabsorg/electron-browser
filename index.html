@@ -2,221 +2,751 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claude Code</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Claude</title>
   <style>
-    :root {
-      --bg-dark: #0d1117;
-      --sidebar-bg: #161b22;
-      --border-color: #30363d;
-      --text-main: #e6edf3;
-      --text-muted: #8b949e;
-      --accent-blur: rgba(56, 139, 253, 0.1);
-    }
-
+    /* --------------------
+       CLAUDE.AI EXACT STYLE RESET
+       Colors, spacing, fonts, shadows from official.
+    -------------------- */
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Roboto, "Inter", sans-serif;
+      background: #f7f7f5;  /* Claude's off-white background */
+      color: #1a1a1a;
+      height: 100vh;
       overflow: hidden;
     }
 
-    #app {
+    /* Main app grid — exactly like Claude desktop */
+    .app-container {
       display: flex;
-      height: 100vh;
-      width: 100vw;
+      height: 100%;
+      width: 100%;
+      background: #ffffff;
     }
 
-    /* --- Sidebar Section --- */
+    /* ========= SIDEBAR ========= */
+    /* Claude's sidebar is light, minimal, with subtle borders */
     .sidebar {
       width: 260px;
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--border-color);
+      background-color: #f9f9f8;
+      border-right: 1px solid #e8e8e6;
       display: flex;
       flex-direction: column;
-      transition: all 0.3s ease;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      z-index: 10;
     }
 
-    .logo-container {
-      padding: 20px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      letter-spacing: -0.5px;
+    /* Logo & branding - exactly the Claude wordmark style */
+    .claude-brand {
+      padding: 20px 20px 16px 20px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      border-bottom: 1px solid #e8e8e6;
+      margin-bottom: 20px;
     }
 
-    .nav-items {
+    .claude-icon {
+      background: #d97757;  /* Claude signature terracotta */
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .claude-brand span {
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+      color: #1f1f1f;
+    }
+
+    /* Navigation menu items — pure Claude style */
+    .nav-section {
       flex: 1;
       padding: 0 12px;
     }
 
-    .menu-item {
+    .nav-item {
       padding: 10px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      color: var(--text-muted);
-      font-size: 14px;
       margin-bottom: 4px;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .menu-item:hover {
-      background: #21262d;
-      color: var(--text-main);
-    }
-
-    .menu-item.active {
-      background: #21262d;
-      color: white;
-    }
-
-    /* --- Main Content Section --- */
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      background: var(--bg-dark);
-    }
-
-    .header {
-      height: 60px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 450;
+      color: #3c3c3c;
+      cursor: pointer;
+      transition: background 0.15s;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      border-bottom: 1px solid var(--border-color);
-      background: rgba(13, 17, 23, 0.8);
-      backdrop-filter: blur(10px);
+      gap: 12px;
     }
 
-    .chat-container {
+    .nav-item svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      fill: none;
+    }
+
+    .nav-item.active {
+      background: #efefec;
+      color: #1a1a1a;
+      font-weight: 500;
+    }
+
+    .nav-item:hover:not(.active) {
+      background: #f1f1ef;
+    }
+
+    /* Chat List History (only decorative for clone look) */
+    .chat-history-area {
+      margin-top: 24px;
+      padding: 0 12px;
+    }
+
+    .history-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #8e8e8a;
+      letter-spacing: 0.3px;
+      padding: 0 12px;
+      margin-bottom: 8px;
+    }
+
+    .history-item {
+      padding: 8px 12px;
+      font-size: 14px;
+      border-radius: 8px;
+      color: #4b4b48;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+    }
+
+    .history-item:hover {
+      background: #f1f1ef;
+    }
+
+    /* Bottom user section */
+    .user-footer {
+      padding: 20px 16px 24px;
+      border-top: 1px solid #e8e8e6;
+      margin-top: auto;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #5c5c5a;
+    }
+
+    /* ========= MAIN CHAT AREA ========= */
+    .main-chat {
       flex: 1;
-      overflow-y: auto;
-      padding: 40px 20px;
       display: flex;
       flex-direction: column;
-      align-items: center; /* Centering chat for that Claude look */
-    }
-
-    .chat-content {
-      width: 100%;
-      max-width: 800px; /* Standard reading width */
-    }
-
-    /* --- Input Area --- */
-    .input-area {
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      background: linear-gradient(transparent, var(--bg-dark) 20%);
-    }
-
-    .input-wrapper {
-      width: 100%;
-      max-width: 800px;
+      background: #ffffff;
+      overflow: hidden;
       position: relative;
-      background: #161b22;
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 12px;
-      transition: border-color 0.3s;
     }
 
-    .input-wrapper:focus-within {
-      border-color: #58a6ff;
+    /* Claude header — minimal, no heavy border */
+    .chat-header {
+      padding: 14px 28px;
+      border-bottom: 1px solid #efefec;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      background: white;
     }
 
-    textarea {
+    .model-badge {
+      font-weight: 500;
+      font-size: 15px;
+      background: #f2f2f0;
+      padding: 5px 12px;
+      border-radius: 100px;
+      color: #2c2c2a;
+    }
+
+    .plan-tag {
+      font-size: 12px;
+      color: #8e8e8a;
+      background: #f7f7f5;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* Scrollable messages container */
+    .messages-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 40px 20px 20px;
+      scroll-behavior: smooth;
+    }
+
+    .messages-inner {
+      max-width: 780px;
+      margin: 0 auto;
       width: 100%;
-      min-height: 80px;
-      max-height: 200px;
+    }
+
+    /* Welcome greeting — Claude "How can I help you today?" */
+    .welcome-greeting {
+      text-align: center;
+      margin-top: 18vh;
+      margin-bottom: 30px;
+    }
+
+    .claude-wave {
+      font-size: 48px;
+      margin-bottom: 18px;
+    }
+
+    .welcome-title {
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+      color: #1f1f1f;
+      margin-bottom: 8px;
+    }
+
+    .welcome-sub {
+      color: #6e6e6a;
+      font-size: 16px;
+    }
+
+    /* Chat bubbles — Claude style (light, rounded, minimal) */
+    .message {
+      display: flex;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.2s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .user-message {
+      justify-content: flex-end;
+    }
+
+    .assistant-message {
+      justify-content: flex-start;
+    }
+
+    .message-bubble {
+      max-width: 85%;
+      padding: 12px 18px;
+      border-radius: 24px;
+      font-size: 15px;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .user-message .message-bubble {
+      background: #e8e8e6;
+      color: #1a1a1a;
+      border-bottom-right-radius: 6px;
+    }
+
+    .assistant-message .message-bubble {
+      background: #f4f4f2;
+      color: #1f1f1f;
+      border-bottom-left-radius: 6px;
+    }
+
+    /* Typing indicator (Claude subtle dots) */
+    .typing-indicator {
+      background: #f4f4f2;
+      padding: 12px 18px;
+      border-radius: 24px;
+      border-bottom-left-radius: 6px;
+      display: inline-flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .typing-indicator span {
+      width: 7px;
+      height: 7px;
+      background: #9c9c98;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 1.4s infinite ease-in-out both;
+    }
+
+    .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+    .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes pulse {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Input area — exactly Claude's rounded card with shadow */
+    .input-container {
+      padding: 20px 20px 28px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0), white 12%);
+    }
+
+    .input-card {
+      max-width: 780px;
+      margin: 0 auto;
+      background: white;
+      border: 1px solid #e2e2df;
+      border-radius: 28px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+      transition: box-shadow 0.2s, border-color 0.2s;
+      overflow: hidden;
+    }
+
+    .input-card:focus-within {
+      border-color: #d97757;
+      box-shadow: 0 4px 16px rgba(217, 119, 87, 0.08);
+    }
+
+    .input-area-flex {
+      display: flex;
+      flex-direction: column;
+      padding: 12px 16px 10px 18px;
+    }
+
+    .chat-input {
+      width: 100%;
+      border: none;
+      resize: none;
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
       background: transparent;
+      color: #1f1f1f;
+      min-height: 52px;
+      max-height: 180px;
+      line-height: 1.5;
+    }
+
+    .chat-input::placeholder {
+      color: #b3b3ae;
+      font-weight: 400;
+    }
+
+    .input-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      padding-left: 4px;
+    }
+
+    .send-button {
+      background: #d97757;
       border: none;
       color: white;
-      resize: none;
-      outline: none;
-      font-size: 16px;
-      line-height: 1.5;
-      padding: 8px;
+      width: 34px;
+      height: 34px;
+      border-radius: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.1s;
     }
 
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
+    .send-button:hover {
+      background: #c56545;
+    }
+
+    .send-button:active {
+      transform: scale(0.96);
+    }
+
+    .attach-hint {
+      color: #aaa;
+      font-size: 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Mobile responsive: hide sidebar on small screens with toggle simulation */
+    @media (max-width: 720px) {
       .sidebar {
-        width: 0;
-        position: absolute;
-        z-index: 10;
+        position: fixed;
+        left: -280px;
         height: 100%;
+        transition: left 0.25s ease;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.05);
+        z-index: 50;
+        background: #f9f9f8;
       }
-      .main {
+      .sidebar.mobile-open {
+        left: 0;
+      }
+      .main-chat {
         width: 100%;
       }
-      .chat-content, .input-wrapper {
-        max-width: 100%;
-      }
     }
 
-    /* Webview for Facebook */
-    #fbView {
-      position: fixed;
-      inset: 0;
-      display: none;
-      z-index: 100;
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f0f0ed;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cccbc7;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
 
-<div id="app">
-  <aside class="sidebar">
-    <div class="logo-container">
-      <div style="width: 24px; height: 24px; background: #d97757; border-radius: 4px;"></div>
-      Claude Code
+<div class="app-container">
+  <!-- Sidebar: Exactly like Claude's minimal left panel -->
+  <aside class="sidebar" id="sidebar">
+    <div class="claude-brand">
+      <div class="claude-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="1.5" fill="none"/>
+          <path d="M2 17L12 22L22 17" stroke="white" stroke-width="1.5" fill="none"/>
+          <path d="M2 12L12 17L22 12" stroke="white" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <span>Claude</span>
     </div>
-    <div class="nav-items">
-      <div class="menu-item active">New Chat</div>
-      <div class="menu-item">History</div>
-      <div class="menu-item">Settings</div>
+    <div class="nav-section">
+      <div class="nav-item active" id="newChatBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-linecap="round"/>
+        </svg>
+        New Chat
+      </div>
+      <div class="nav-item" id="historyBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M3 6h18M9 12h6M7 18h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        History
+      </div>
+      <div class="nav-item" id="settingsBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M18.37 7.29L19.7 5.96M12 3v2M4.3 5.96l1.33 1.33M3 12h2M7.29 18.37L5.96 19.7M12 21v-2M19.7 18.37l-1.33-1.33M21 12h-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Settings
+      </div>
+    </div>
+    <div class="chat-history-area">
+      <div class="history-label">RECENT CHATS</div>
+      <div class="history-item" data-convo="Design inspiration">🎨 Design inspiration</div>
+      <div class="history-item" data-convo="React hooks help">⚛️ React hooks help</div>
+      <div class="history-item" data-convo="Marketing strategy">📈 Marketing strategy</div>
+    </div>
+    <div class="user-footer">
+      <div style="background:#d97757; width:28px; height:28px; border-radius: 50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:500;">C</div>
+      <div style="flex:1">Claude Pro</div>
+      <div style="font-size:12px;">✨</div>
     </div>
   </aside>
 
-  <main class="main">
-    <header class="header">
-      <div style="font-weight: 500;">Claude 3.5 Sonnet</div>
-      <div style="color: var(--text-muted); font-size: 12px;">Pro Plan</div>
+  <!-- Main Chat Interface -->
+  <main class="main-chat">
+    <header class="chat-header">
+      <div class="model-badge">Claude 3.5 Sonnet</div>
+      <div class="plan-tag">Pro Plan</div>
     </header>
 
-    <div class="chat-container">
-      <div class="chat-content">
-        <h2 style="text-align: center; margin-top: 20vh; color: var(--text-muted); font-weight: 400;">
-          How can I help you today?
-        </h2>
+    <div class="messages-container" id="messagesContainer">
+      <div class="messages-inner" id="messagesInner">
+        <!-- Welcome screen (default) -->
+        <div class="welcome-greeting" id="welcomeScreen">
+          <div class="claude-wave">👋</div>
+          <div class="welcome-title">How can I help you today?</div>
+          <div class="welcome-sub">Ask me anything — I'm Claude, an AI assistant from Anthropic.</div>
+        </div>
+        <!-- Dynamic messages will appear here -->
       </div>
     </div>
 
-    <div class="input-area">
-      <div class="input-wrapper">
-        <textarea placeholder="Ask anything..."></textarea>
-        <div style="display: flex; justify-content: flex-end; margin-top: 8px;">
-          <button style="background: #30363d; border: none; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer;">
-            Send
-          </button>
+    <div class="input-container">
+      <div class="input-card">
+        <div class="input-area-flex">
+          <textarea class="chat-input" id="chatInput" rows="1" placeholder="Ask anything..."></textarea>
+          <div class="input-actions">
+            <div class="attach-hint">
+              <span>⌘ ⏎</span>
+            </div>
+            <button class="send-button" id="sendBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </main>
 </div>
 
-<webview id="fbView" src="https://www.facebook.com"></webview>
-
-<script src="renderer.js"></script>
+<script>
+  // Claude clone - fully functional chat simulation with rich UX, pure Claude aesthetic
+  (function() {
+    // DOM elements
+    const messagesContainer = document.getElementById('messagesContainer');
+    const messagesInner = document.getElementById('messagesInner');
+    const welcomeScreenDiv = document.getElementById('welcomeScreen');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const newChatBtn = document.getElementById('newChatBtn');
+    const historyBtn = document.getElementById('historyBtn');
+    const settingsBtn = document.getElementById('settingsBtn');
+    const historyItems = document.querySelectorAll('.history-item');
+    
+    // State
+    let currentMessages = [];     // store message objects { role, content }
+    let isTyping = false;
+    let typingTimeout = null;
+    
+    // Helper: remove welcome screen if any messages exist
+    function updateWelcomeVisibility() {
+      if (currentMessages.length === 0) {
+        if (!welcomeScreenDiv) return;
+        welcomeScreenDiv.style.display = 'block';
+      } else {
+        if (welcomeScreenDiv) welcomeScreenDiv.style.display = 'none';
+      }
+    }
+    
+    // Render all messages from currentMessages array (Claude style)
+    function renderMessages() {
+      if (!messagesInner) return;
+      // Keep welcome screen element but we manage visibility
+      const existingMessages = messagesInner.querySelectorAll('.message:not(.welcome-greeting)');
+      existingMessages.forEach(el => el.remove());
+      
+      for (let msg of currentMessages) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${msg.role === 'user' ? 'user-message' : 'assistant-message'}`;
+        const bubble = document.createElement('div');
+        bubble.className = 'message-bubble';
+        bubble.textContent = msg.content;
+        messageDiv.appendChild(bubble);
+        messagesInner.appendChild(messageDiv);
+      }
+      // scroll to bottom after render
+      scrollToBottom();
+    }
+    
+    function scrollToBottom() {
+      if (messagesContainer) {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+    }
+    
+    // Add a message (updates state & re-renders)
+    function addMessage(role, content) {
+      currentMessages.push({ role, content });
+      renderMessages();
+      updateWelcomeVisibility();
+      scrollToBottom();
+    }
+    
+    // Simulate Claude's thinking + response
+    async function sendToClaude(userMessage) {
+      // Add user message instantly
+      addMessage('user', userMessage);
+      chatInput.value = '';
+      autoResizeTextarea();
+      
+      // Show typing indicator
+      showTypingIndicator();
+      
+      // Simulate network delay with intelligent, coherent claude-like answer
+      await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 500));
+      
+      // Claude responses — rich, helpful, natural
+      const lowerMsg = userMessage.toLowerCase();
+      let replyText = "";
+      
+      if (lowerMsg.includes("hello") || lowerMsg.includes("hi") || lowerMsg.includes("hey")) {
+        replyText = "Hello! 👋 I'm Claude, an AI assistant from Anthropic. How can I help you today? Feel free to ask me anything—coding, writing, analysis, or just brainstorming.";
+      } 
+      else if (lowerMsg.includes("how are you")) {
+        replyText = "I'm functioning beautifully, thank you for asking! Ready to assist with whatever you're working on. What's on your mind?";
+      }
+      else if (lowerMsg.includes("code") || lowerMsg.includes("javascript") || lowerMsg.includes("react")) {
+        replyText = "I'd be glad to help with code! I have expertise in many languages. Could you give me more specific details or share a snippet you're working with? I can explain concepts, debug, or generate examples.";
+      }
+      else if (lowerMsg.includes("claude") && (lowerMsg.includes("you") || lowerMsg.includes("who"))) {
+        replyText = "I'm Claude, an AI assistant built by Anthropic. I'm designed to be helpful, harmless, and honest. I can process large contexts, analyze files, and assist with complex reasoning. How can I assist you further?";
+      }
+      else if (lowerMsg.includes("thanks") || lowerMsg.includes("thank you")) {
+        replyText = "You're very welcome! 😊 I'm glad I could help. Let me know if there's anything else you'd like to explore.";
+      }
+      else if (lowerMsg.trim() === "") {
+        replyText = "I'm here to help! Feel free to ask me a question or share what you're working on.";
+      }
+      else {
+        replyText = `That's an interesting question. Let me think... ${userMessage}\n\nHere's my response: I notice you're asking about "${userMessage.substring(0, 60)}...". As Claude, I aim to provide clear, helpful information. Could you share a bit more context? I'm ready to dive deeper into any topic—from creative writing to technical documentation or strategic advice.`;
+      }
+      
+      removeTypingIndicator();
+      addMessage('assistant', replyText);
+    }
+    
+    // Typing indicator logic
+    function showTypingIndicator() {
+      if (isTyping) return;
+      isTyping = true;
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'message assistant-message';
+      typingDiv.id = 'typingIndicator';
+      typingDiv.innerHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`;
+      messagesInner.appendChild(typingDiv);
+      scrollToBottom();
+    }
+    
+    function removeTypingIndicator() {
+      const indicator = document.getElementById('typingIndicator');
+      if (indicator) indicator.remove();
+      isTyping = false;
+    }
+    
+    // Handle send action
+    async function handleSend() {
+      const message = chatInput.value.trim();
+      if (!message || isTyping) return;
+      await sendToClaude(message);
+    }
+    
+    // Reset chat to new conversation (clear history, welcome back)
+    function newChat() {
+      if (isTyping) return;
+      currentMessages = [];
+      renderMessages();
+      updateWelcomeVisibility();
+      chatInput.value = '';
+      autoResizeTextarea();
+      // Focus input for smooth UX
+      chatInput.focus();
+      // remove any leftover indicators
+      removeTypingIndicator();
+    }
+    
+    // Load history demo (just example — replace current conversation)
+    function loadHistoryConversation(topic) {
+      if (isTyping) return;
+      newChat(); // reset first
+      let demoQuestion = "", demoAnswer = "";
+      if (topic.includes("Design inspiration")) {
+        demoQuestion = "Can you give me some UI design inspiration for a modern dashboard?";
+        demoAnswer = "Absolutely! For a modern dashboard, consider a clean card-based layout with soft neutrals, subtle shadows, and data visualization using minimal charts. Claude suggests using a side drawer navigation, light gray backgrounds, and accent colors like terracotta or deep teal to highlight key metrics. Also, prioritize whitespace and a responsive grid.";
+      } else if (topic.includes("React hooks")) {
+        demoQuestion = "Explain React useEffect cleanup function?";
+        demoAnswer = "Great question! The cleanup function in useEffect runs before the component unmounts or before the next effect. It prevents memory leaks by canceling subscriptions, timers, or async requests. Syntax: return () => { /* cleanup */ }. Always use cleanup when you set up external listeners to avoid bugs.";
+      } else if (topic.includes("Marketing strategy")) {
+        demoQuestion = "What's a good go-to-market strategy for a SaaS product?";
+        demoAnswer = "For a B2B SaaS, focus on a product-led growth model. Start with a freemium tier, build case studies, leverage content marketing (SEO and thought leadership), and run targeted LinkedIn campaigns. Use early adopter feedback to refine your ICP. Claude recommends iterating based on user data and creating a referral loop.";
+      } else {
+        return;
+      }
+      addMessage('user', demoQuestion);
+      showTypingIndicator();
+      setTimeout(() => {
+        removeTypingIndicator();
+        addMessage('assistant', demoAnswer);
+      }, 700);
+    }
+    
+    // Auto-resize textarea
+    function autoResizeTextarea() {
+      const textarea = chatInput;
+      textarea.style.height = 'auto';
+      const newHeight = Math.min(textarea.scrollHeight, 140);
+      textarea.style.height = newHeight + 'px';
+    }
+    
+    // Event listeners
+    sendBtn.addEventListener('click', handleSend);
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleSend();
+      }
+    });
+    chatInput.addEventListener('input', autoResizeTextarea);
+    
+    newChatBtn.addEventListener('click', newChat);
+    
+    // History items click
+    historyItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        const conversationName = item.getAttribute('data-convo') || item.innerText;
+        loadHistoryConversation(conversationName);
+        // For mobile, close sidebar after click
+        if (window.innerWidth <= 720) {
+          document.getElementById('sidebar').classList.remove('mobile-open');
+        }
+      });
+    });
+    
+    // Settings button small toast effect
+    settingsBtn.addEventListener('click', () => {
+      addMessage('assistant', "⚙️ Settings panel would appear here (Claude clone). You could adjust theme, preferences, and API settings in the full version. For now, enjoy the Claude aesthetic!");
+    });
+    historyBtn.addEventListener('click', () => {
+      addMessage('assistant', "📋 Your chat history will be stored locally here. Click any recent chat from the left sidebar to load a demo conversation. This clone mimics Claude's UI beautifully.");
+    });
+    
+    // Mobile sidebar toggle hamburger? we create subtle doubletap on header? but emulate claude: we add invisible menu? but user knows.
+    // Add a menu button for mobile: Because Claude web has no hamburger but we can improve UX
+    const header = document.querySelector('.chat-header');
+    if (header && window.innerWidth <= 720) {
+      const menuIcon = document.createElement('div');
+      menuIcon.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3c3c3c" stroke-width="1.8"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      menuIcon.style.cursor = 'pointer';
+      menuIcon.style.marginRight = '12px';
+      menuIcon.style.display = 'flex';
+      header.insertBefore(menuIcon, header.firstChild);
+      menuIcon.addEventListener('click', (e) => {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('mobile-open');
+      });
+    }
+    
+    // initial auto-focus
+    chatInput.focus();
+    
+    // Resize observer for initial placeholder style
+    autoResizeTextarea();
+    
+    // Optionally, show extremely accurate clone look-n-feel
+    console.log('Claude clone ready — perfect copycat UI');
+  })();
+</script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "name": "claude-code",
+  "name": "claude",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
@@ -8,8 +8,8 @@
     "build": "electron-builder"
   },
   "build": {
-    "appId": "com.adnan.claudecode",
-    "productName": "Claude Code",
+    "appId": "com.adnan.claude",
+    "productName": "Claude",
     "win": {
       "target": "nsis"
     },
