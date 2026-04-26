@@ -13,7 +13,8 @@ function createWindow() {
     icon: path.join(__dirname, "icon.png"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      contextIsolation: true
+      contextIsolation: true,
+      webviewTag: true
     }
   });
 
@@ -25,18 +26,17 @@ app.whenReady().then(() => {
 
   // 🔥 IMPORTANT: wait a bit before shortcut register
   setTimeout(() => {
-    const success = globalShortcut.register("CommandOrControl+Z", () => {
+    const success = globalShortcut.register("CommandOrControl+Space", () => {
       if (!win) return;
 
       isFB = !isFB;
-
-      if (isFB) {
-        win.loadURL("https://www.facebook.com");
-      } else {
-        win.loadFile("index.html");
-      }
+      win.webContents.send("toggle-view", isFB);
     });
 
     console.log("Shortcut registered:", success);
   }, 1000);
+});
+
+app.on("will-quit", () => {
+  globalShortcut.unregisterAll();
 });

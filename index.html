@@ -31,6 +31,10 @@
       background: #ffffff;
     }
 
+    .hidden {
+      display: none !important;
+    }
+
     /* ========= SIDEBAR ========= */
     /* Claude's sidebar is light, minimal, with subtle borders */
     .sidebar {
@@ -420,11 +424,244 @@
       background: #cccbc7;
       border-radius: 8px;
     }
+
+    .browser-shell {
+      display: none;
+      height: 100vh;
+      width: 100%;
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), rgba(244, 239, 234, 0.92) 42%, rgba(232, 226, 218, 0.92) 100%);
+      color: #1c1c1b;
+    }
+
+    .browser-shell.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .browser-topbar {
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(93, 79, 64, 0.12);
+      background: rgba(250, 247, 242, 0.94);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .browser-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 320px;
+    }
+
+    .browser-nav-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+ 
+
+   
+
+    .browser-address-bar {
+      flex: 1;
+      height: 40px;
+      border-radius: 14px;
+      border: 1px solid rgba(157, 136, 116, 0.16);
+      background: rgba(255, 255, 255, 0.96);
+      padding: 0 16px;
+      font-size: 14px;
+      color: #2f2822;
+      outline: none;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    .browser-address-bar:focus {
+      border-color: rgba(24, 119, 242, 0.42);
+      box-shadow: 0 0 0 4px rgba(24, 119, 242, 0.08);
+    }
+
+    .tab-strip {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      overflow-x: auto;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .browser-tab {
+      min-width: 180px;
+      max-width: 240px;
+      height: 38px;
+      padding: 0 10px 0 14px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      border: 1px solid transparent;
+      background: rgba(233, 225, 215, 0.78);
+      color: #64564a;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+      flex-shrink: 0;
+    }
+
+    .browser-tab:hover {
+      background: rgba(227, 218, 208, 0.95);
+    }
+
+    .browser-tab.active {
+      background: #ffffff;
+      border-color: rgba(157, 136, 116, 0.22);
+      color: #2f2822;
+      box-shadow: 0 10px 24px rgba(89, 70, 51, 0.08);
+    }
+
+    .tab-favicon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #d97757, #9d5a42);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .tab-title {
+      flex: 1;
+      min-width: 0;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tab-close,
+    .tab-add {
+      border: none;
+      cursor: pointer;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+
+    .tab-close {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: transparent;
+      color: inherit;
+      font-size: 15px;
+      line-height: 1;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tab-close:hover {
+      background: rgba(120, 103, 88, 0.12);
+    }
+
+    .tab-add {
+      width: 38px;
+      height: 38px;
+      border-radius: 7px;
+      background: #ffffff;
+      color: #53473c;
+      font-size: 22px;
+      box-shadow: 0 10px 24px rgba(89, 70, 51, 0.08);
+      flex-shrink: 0;
+    }
+
+    .tab-add:hover {
+      background: #f8f3ee;
+    }
+
+    @media (max-width: 980px) {
+      .browser-topbar {
+        flex-wrap: wrap;
+      }
+
+      .tab-strip {
+        order: 1;
+        width: 100%;
+      }
+
+      .browser-controls {
+        order: 2;
+        width: 100%;
+      }
+    }
+
+    .browser-panels {
+      flex: 1;
+      position: relative;
+    }
+
+    .browser-panel {
+      position: absolute;
+      inset: 0px;
+      display: none;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 16px 40px rgba(66, 49, 33, 0.12);
+      border: 1px solid rgba(133, 113, 93, 0.12);
+    }
+
+    .browser-panel.active {
+      display: block;
+    }
+
+    .browser-empty-state {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at top, rgba(233, 224, 214, 0.55), rgba(255, 255, 255, 0.96) 48%);
+      color: #53473c;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .browser-empty-card {
+      max-width: 520px;
+    }
+
+    .browser-empty-title {
+      font-size: 30px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .browser-empty-copy {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #786b5f;
+    }
+
+    .browser-webview {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
   </style>
 </head>
 <body>
 
-<div class="app-container">
+<div class="app-container" id="workspaceApp">
   <!-- Sidebar: Exactly like Claude's minimal left panel -->
   <aside class="sidebar" id="sidebar">
     <div class="claude-brand">
@@ -512,6 +749,23 @@
   </main>
 </div>
 
+<section class="browser-shell" id="browserShell">
+  <div class="browser-topbar">
+    <div class="tab-strip" id="tabStrip">
+      <button class="tab-add" id="newTabBtn" type="button" aria-label="Open new tab">+</button>
+    </div>
+    <div class="browser-controls">
+      <div class="browser-nav-group">
+        <button class="browser-nav-btn" id="backBtn" type="button" aria-label="Go back"></button>
+        <button class="browser-nav-btn" id="forwardBtn" type="button" aria-label="Go forward"></button>
+        <button class="browser-nav-btn" id="reloadBtn" type="button" aria-label="Reload"></button>
+      </div>
+      <input class="browser-address-bar" id="addressBar" type="text" placeholder="Search Google or enter website URL" autocomplete="off" />
+    </div>
+  </div>
+  <div class="browser-panels" id="browserPanels"></div>
+</section>
+
 <script>
   // Claude clone - fully functional chat simulation with rich UX, pure Claude aesthetic
   (function() {
@@ -525,11 +779,25 @@
     const historyBtn = document.getElementById('historyBtn');
     const settingsBtn = document.getElementById('settingsBtn');
     const historyItems = document.querySelectorAll('.history-item');
+    const workspaceApp = document.getElementById('workspaceApp');
+    const browserShell = document.getElementById('browserShell');
+    const tabStrip = document.getElementById('tabStrip');
+    const browserPanels = document.getElementById('browserPanels');
+    const newTabBtn = document.getElementById('newTabBtn');
+    const addressBar = document.getElementById('addressBar');
+    const backBtn = document.getElementById('backBtn');
+    const forwardBtn = document.getElementById('forwardBtn');
+    const reloadBtn = document.getElementById('reloadBtn');
     
     // State
     let currentMessages = [];     // store message objects { role, content }
     let isTyping = false;
     let typingTimeout = null;
+    let isBrowserMode = false;
+    let browserTabs = [];
+    let activeTabId = null;
+    let nextTabId = 1;
+    const browserHomeUrl = 'https://www.google.com/';
     
     // Helper: remove welcome screen if any messages exist
     function updateWelcomeVisibility() {
@@ -689,6 +957,267 @@
       const newHeight = Math.min(textarea.scrollHeight, 140);
       textarea.style.height = newHeight + 'px';
     }
+
+    function getActiveTab() {
+      return browserTabs.find((tab) => tab.id === activeTabId) || null;
+    }
+
+    function normalizeBrowserInput(input) {
+      const value = input.trim();
+      if (!value) {
+        return browserHomeUrl;
+      }
+
+      if (/^https?:\/\//i.test(value)) {
+        return value;
+      }
+
+      if (/^(localhost[:/]|[\w-]+\.[\w.-]{2,})(\/.*)?$/i.test(value)) {
+        return `https://${value}`;
+      }
+
+      return `https://www.google.com/search?q=${encodeURIComponent(value)}`;
+    }
+
+    function formatAddress(url) {
+      if (!url) {
+        return '';
+      }
+
+      try {
+        const parsedUrl = new URL(url);
+        return parsedUrl.href;
+      } catch (error) {
+        return url;
+      }
+    }
+
+    function getTabIconText(url) {
+      if (!url) {
+        return 'N';
+      }
+
+      try {
+        const hostname = new URL(url).hostname.replace(/^www\./i, '');
+        return hostname.charAt(0).toUpperCase() || 'W';
+      } catch (error) {
+        return 'W';
+      }
+    }
+
+    function updateAddressBar() {
+      const activeTab = getActiveTab();
+      addressBar.value = activeTab ? (activeTab.pendingInput || formatAddress(activeTab.url)) : '';
+    }
+
+    function updateNavButtons() {
+      const activeTab = getActiveTab();
+      const hasActiveTab = Boolean(activeTab);
+
+      backBtn.disabled = !hasActiveTab || !activeTab.canGoBack;
+      forwardBtn.disabled = !hasActiveTab || !activeTab.canGoForward;
+      reloadBtn.disabled = !hasActiveTab;
+      addressBar.disabled = !hasActiveTab;
+    }
+
+    function navigateActiveTab(rawInput) {
+      const activeTab = getActiveTab();
+      if (!activeTab) {
+        return;
+      }
+
+      const nextUrl = normalizeBrowserInput(rawInput);
+      activeTab.pendingInput = '';
+      activeTab.title = 'Loading...';
+      activeTab.iconText = getTabIconText(nextUrl);
+      activeTab.webview.src = nextUrl;
+      activeTab.emptyState.classList.add('hidden');
+      activeTab.webview.classList.remove('hidden');
+      addressBar.value = nextUrl;
+      renderBrowserTabs();
+    }
+
+    function setBrowserMode(nextMode) {
+      isBrowserMode = !!nextMode;
+      workspaceApp.classList.toggle('hidden', isBrowserMode);
+      browserShell.classList.toggle('active', isBrowserMode);
+
+      if (isBrowserMode) {
+        if (browserTabs.length === 0) {
+          createBrowserTab();
+        } else {
+          const activeTab = browserTabs.find((tab) => tab.id === activeTabId);
+          if (activeTab && !activeTab.url) {
+            addressBar.focus();
+          } else if (activeTab && activeTab.webview && typeof activeTab.webview.focus === 'function') {
+            activeTab.webview.focus();
+          }
+        }
+        updateAddressBar();
+        updateNavButtons();
+      } else {
+        chatInput.focus();
+      }
+    }
+
+    function renderBrowserTabs() {
+      tabStrip.querySelectorAll('.browser-tab').forEach((element) => element.remove());
+
+      browserTabs.forEach((tab) => {
+        const tabButton = document.createElement('button');
+        tabButton.type = 'button';
+        tabButton.className = `browser-tab${tab.id === activeTabId ? ' active' : ''}`;
+
+        const favicon = document.createElement('span');
+        favicon.className = 'tab-favicon';
+        favicon.textContent = tab.iconText || 'W';
+
+        const title = document.createElement('span');
+        title.className = 'tab-title';
+        title.textContent = tab.title;
+
+        const closeIcon = document.createElement('span');
+        closeIcon.className = 'tab-close';
+        closeIcon.setAttribute('aria-hidden', 'true');
+        closeIcon.innerHTML = '&times;';
+
+        tabButton.appendChild(favicon);
+        tabButton.appendChild(title);
+        tabButton.appendChild(closeIcon);
+
+        tabButton.addEventListener('click', () => {
+          activateBrowserTab(tab.id);
+        });
+
+        closeIcon.addEventListener('click', (event) => {
+          event.stopPropagation();
+          closeBrowserTab(tab.id);
+        });
+
+        tabStrip.insertBefore(tabButton, newTabBtn);
+      });
+    }
+
+    function activateBrowserTab(tabId) {
+      activeTabId = tabId;
+
+      browserTabs.forEach((tab) => {
+        tab.panel.classList.toggle('active', tab.id === tabId);
+      });
+
+      renderBrowserTabs();
+
+      const activeTab = browserTabs.find((tab) => tab.id === tabId);
+      if (activeTab && !activeTab.url) {
+        addressBar.focus();
+      } else if (activeTab && activeTab.webview && typeof activeTab.webview.focus === 'function') {
+        activeTab.webview.focus();
+      }
+      updateAddressBar();
+      updateNavButtons();
+    }
+
+    function createBrowserTab() {
+      const tabId = nextTabId++;
+      const panel = document.createElement('div');
+      panel.className = 'browser-panel';
+      panel.dataset.tabId = String(tabId);
+
+      const emptyState = document.createElement('div');
+      emptyState.className = 'browser-empty-state';
+      emptyState.innerHTML = `
+        <div class="browser-empty-card">
+          <div class="browser-empty-title">New Tab</div>
+          <div class="browser-empty-copy">Address bar-e website URL din, ba jekono kichu likhe Enter press korlei search result open hobe.</div>
+        </div>
+      `;
+
+      const webview = document.createElement('webview');
+      webview.className = 'browser-webview hidden';
+      webview.setAttribute('allowpopups', '');
+      webview.setAttribute('partition', 'persist:workspace-browser');
+      webview.setAttribute('useragent', navigator.userAgent);
+
+      panel.appendChild(emptyState);
+      panel.appendChild(webview);
+      browserPanels.appendChild(panel);
+
+      const tab = {
+        id: tabId,
+        title: 'New Tab',
+        url: '',
+        pendingInput: '',
+        canGoBack: false,
+        canGoForward: false,
+        iconText: 'N',
+        panel,
+        webview,
+        emptyState
+      };
+
+      const syncTabState = () => {
+        tab.url = webview.getURL();
+        tab.canGoBack = webview.canGoBack();
+        tab.canGoForward = webview.canGoForward();
+        tab.iconText = getTabIconText(tab.url);
+        renderBrowserTabs();
+
+        if (tab.id === activeTabId) {
+          updateAddressBar();
+          updateNavButtons();
+        }
+      };
+
+      webview.addEventListener('page-title-updated', (event) => {
+        tab.title = event.title || 'New Tab';
+        renderBrowserTabs();
+      });
+
+      webview.addEventListener('did-start-loading', () => {
+        syncTabState();
+      });
+
+      webview.addEventListener('did-stop-loading', () => {
+        syncTabState();
+      });
+
+      webview.addEventListener('did-navigate', () => {
+        syncTabState();
+      });
+
+      webview.addEventListener('did-navigate-in-page', () => {
+        syncTabState();
+      });
+
+      webview.addEventListener('did-fail-load', () => {
+        tab.title = 'Page failed';
+        renderBrowserTabs();
+        syncTabState();
+      });
+
+      browserTabs.push(tab);
+      activateBrowserTab(tabId);
+    }
+
+    function closeBrowserTab(tabId) {
+      const closingIndex = browserTabs.findIndex((tab) => tab.id === tabId);
+      if (closingIndex === -1) return;
+
+      const closingTab = browserTabs[closingIndex];
+      closingTab.panel.remove();
+      browserTabs.splice(closingIndex, 1);
+
+      if (browserTabs.length === 0) {
+        activeTabId = null;
+        renderBrowserTabs();
+        updateAddressBar();
+        updateNavButtons();
+        return;
+      }
+
+      const fallbackTab = browserTabs[Math.max(0, closingIndex - 1)] || browserTabs[0];
+      activateBrowserTab(fallbackTab.id);
+    }
     
     // Event listeners
     sendBtn.addEventListener('click', handleSend);
@@ -701,6 +1230,51 @@
     chatInput.addEventListener('input', autoResizeTextarea);
     
     newChatBtn.addEventListener('click', newChat);
+    newTabBtn.addEventListener('click', createBrowserTab);
+
+    addressBar.addEventListener('input', () => {
+      const activeTab = getActiveTab();
+      if (!activeTab) {
+        return;
+      }
+
+      activeTab.pendingInput = addressBar.value;
+    });
+
+    addressBar.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        navigateActiveTab(addressBar.value);
+      }
+    });
+
+    backBtn.addEventListener('click', () => {
+      const activeTab = getActiveTab();
+      if (activeTab && activeTab.canGoBack) {
+        activeTab.webview.goBack();
+      }
+    });
+
+    forwardBtn.addEventListener('click', () => {
+      const activeTab = getActiveTab();
+      if (activeTab && activeTab.canGoForward) {
+        activeTab.webview.goForward();
+      }
+    });
+
+    reloadBtn.addEventListener('click', () => {
+      const activeTab = getActiveTab();
+      if (!activeTab) {
+        return;
+      }
+
+      if (!activeTab.url) {
+        navigateActiveTab(browserHomeUrl);
+        return;
+      }
+
+      activeTab.webview.reload();
+    });
     
     // History items click
     historyItems.forEach(item => {
@@ -722,6 +1296,12 @@
       addMessage('assistant', "📋 Your chat history will be stored locally here. Click any recent chat from the left sidebar to load a demo conversation. This clone mimics Claude's UI beautifully.");
     });
     
+    if (window.electronAPI && typeof window.electronAPI.toggle === 'function') {
+      window.electronAPI.toggle((nextMode) => {
+        setBrowserMode(nextMode);
+      });
+    }
+
     // Mobile sidebar toggle hamburger? we create subtle doubletap on header? but emulate claude: we add invisible menu? but user knows.
     // Add a menu button for mobile: Because Claude web has no hamburger but we can improve UX
     const header = document.querySelector('.chat-header');
@@ -743,6 +1323,8 @@
     
     // Resize observer for initial placeholder style
     autoResizeTextarea();
+    renderBrowserTabs();
+    updateNavButtons();
     
     // Optionally, show extremely accurate clone look-n-feel
     console.log('Claude clone ready — perfect copycat UI');
