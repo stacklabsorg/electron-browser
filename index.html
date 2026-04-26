@@ -465,6 +465,29 @@
     }
 
  
+.browser-nav-btn {
+      width: 30px;
+      height: 30px;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      color: #5f6368;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .browser-nav-btn:hover {
+      background: #f1f3f4;
+    }
+
+    .browser-nav-btn:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
 
    
 
@@ -751,15 +774,15 @@
 
 <section class="browser-shell" id="browserShell">
   <div class="browser-topbar">
+    <div class="browser-nav-group">
+        <button class="browser-nav-btn" id="backBtn" type="button" aria-label="Go back">←</button>
+        <button class="browser-nav-btn" id="forwardBtn" type="button" aria-label="Go forward">→</button>
+        <button class="browser-nav-btn" id="reloadBtn" type="button" aria-label="Reload">↻</button>
+      </div>
     <div class="tab-strip" id="tabStrip">
       <button class="tab-add" id="newTabBtn" type="button" aria-label="Open new tab">+</button>
     </div>
     <div class="browser-controls">
-      <div class="browser-nav-group">
-        <button class="browser-nav-btn" id="backBtn" type="button" aria-label="Go back"></button>
-        <button class="browser-nav-btn" id="forwardBtn" type="button" aria-label="Go forward"></button>
-        <button class="browser-nav-btn" id="reloadBtn" type="button" aria-label="Reload"></button>
-      </div>
       <input class="browser-address-bar" id="addressBar" type="text" placeholder="Search Google or enter website URL" autocomplete="off" />
     </div>
   </div>
@@ -1128,7 +1151,7 @@
       emptyState.innerHTML = `
         <div class="browser-empty-card">
           <div class="browser-empty-title">New Tab</div>
-          <div class="browser-empty-copy">Address bar-e website URL din, ba jekono kichu likhe Enter press korlei search result open hobe.</div>
+          <div class="browser-empty-copy">Enter the website URL in the address bar, or type anything and press Enter to open the search results.</div>
         </div>
       `;
 
