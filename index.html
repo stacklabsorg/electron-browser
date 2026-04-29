@@ -9,8 +9,8 @@
     <title>Claude</title>
     <style>
       /* --------------------
-       CLAUDE.AI EXACT STYLE RESET
-       Colors, spacing, fonts, shadows from official.
+       DARK MODE — Claude AI Aesthetic
+       Deep, comfortable dark theme with terracotta accents.
     -------------------- */
       * {
         margin: 0;
@@ -22,30 +22,29 @@
         font-family:
           -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
           Helvetica, Roboto, "Inter", sans-serif;
-        background: #f7f7f5; /* Claude's off-white background */
-        color: #1a1a1a;
+        background: #0a0a0a;
+        color: #e8eced;
         height: 100vh;
         overflow: hidden;
       }
 
-      /* Main app grid — exactly like Claude desktop */
+      /* Main app container — dark foundation */
       .app-container {
         display: flex;
         height: 100%;
         width: 100%;
-        background: #ffffff;
+        background: #0c0c0c;
       }
 
       .hidden {
         display: none !important;
       }
 
-      /* ========= SIDEBAR ========= */
-      /* Claude's sidebar is light, minimal, with subtle borders */
+      /* ========= SIDEBAR (DARK MODE) ========= */
       .sidebar {
         width: 260px;
-        background-color: #f9f9f8;
-        border-right: 1px solid #e8e8e6;
+        background-color: #131314;
+        border-right: 1px solid #2a2a2c;
         display: flex;
         flex-direction: column;
         flex-shrink: 0;
@@ -53,18 +52,17 @@
         z-index: 10;
       }
 
-      /* Logo & branding - exactly the Claude wordmark style */
       .claude-brand {
         padding: 20px 20px 16px 20px;
         display: flex;
         align-items: center;
         gap: 8px;
-        border-bottom: 1px solid #e8e8e6;
+        border-bottom: 1px solid #2a2a2c;
         margin-bottom: 20px;
       }
 
       .claude-icon {
-        background: #d97757; /* Claude signature terracotta */
+        background: #d97757;
         width: 28px;
         height: 28px;
         border-radius: 8px;
@@ -74,17 +72,16 @@
         color: white;
         font-weight: 600;
         font-size: 16px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
       }
 
       .claude-brand span {
         font-size: 20px;
         font-weight: 500;
         letter-spacing: -0.3px;
-        color: #1f1f1f;
+        color: #f0f2f2;
       }
 
-      /* Navigation menu items — pure Claude style */
       .nav-section {
         flex: 1;
         padding: 0 12px;
@@ -96,7 +93,7 @@
         border-radius: 10px;
         font-size: 15px;
         font-weight: 450;
-        color: #3c3c3c;
+        color: #b0b3b8;
         cursor: pointer;
         transition: background 0.15s;
         display: flex;
@@ -113,16 +110,16 @@
       }
 
       .nav-item.active {
-        background: #efefec;
-        color: #1a1a1a;
+        background: #2c2c2e;
+        color: #f2f4f5;
         font-weight: 500;
       }
 
       .nav-item:hover:not(.active) {
-        background: #f1f1ef;
+        background: #222224;
+        color: #e2e6ea;
       }
 
-      /* Chat List History (only decorative for clone look) */
       .chat-history-area {
         margin-top: 24px;
         padding: 0 12px;
@@ -131,7 +128,7 @@
       .history-label {
         font-size: 12px;
         font-weight: 500;
-        color: #8e8e8a;
+        color: #7e8288;
         letter-spacing: 0.3px;
         padding: 0 12px;
         margin-bottom: 8px;
@@ -141,7 +138,7 @@
         padding: 8px 12px;
         font-size: 14px;
         border-radius: 8px;
-        color: #4b4b48;
+        color: #babfc4;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -149,59 +146,57 @@
       }
 
       .history-item:hover {
-        background: #f1f1ef;
+        background: #222224;
+        color: #ffffff;
       }
 
-      /* Bottom user section */
       .user-footer {
         padding: 20px 16px 24px;
-        border-top: 1px solid #e8e8e6;
+        border-top: 1px solid #2a2a2c;
         margin-top: auto;
         font-size: 13px;
         display: flex;
         align-items: center;
         gap: 10px;
-        color: #5c5c5a;
+        color: #a3a9b0;
       }
 
-      /* ========= MAIN CHAT AREA ========= */
+      /* ========= MAIN CHAT AREA — DARK ========= */
       .main-chat {
         flex: 1;
         display: flex;
         flex-direction: column;
-        background: #ffffff;
+        background: #0f0f10;
         overflow: hidden;
         position: relative;
       }
 
-      /* Claude header — minimal, no heavy border */
       .chat-header {
         padding: 14px 28px;
-        border-bottom: 1px solid #efefec;
+        border-bottom: 1px solid #262628;
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-        background: white;
+        background: #0f0f10;
       }
 
       .model-badge {
         font-weight: 500;
         font-size: 15px;
-        background: #f2f2f0;
+        background: #1c1c1e;
         padding: 5px 12px;
         border-radius: 100px;
-        color: #2c2c2a;
+        color: #d1d5db;
       }
 
       .plan-tag {
         font-size: 12px;
-        color: #8e8e8a;
-        background: #f7f7f5;
+        color: #9ea3a8;
+        background: #1c1c1e;
         padding: 4px 12px;
         border-radius: 20px;
       }
 
-      /* Scrollable messages container */
       .messages-container {
         flex: 1;
         overflow-y: auto;
@@ -215,7 +210,7 @@
         width: 100%;
       }
 
-      /* Welcome greeting — Claude "How can I help you today?" */
+      /* Welcome greeting — dark mode */
       .welcome-greeting {
         text-align: center;
         margin-top: 18vh;
@@ -231,16 +226,16 @@
         font-size: 32px;
         font-weight: 500;
         letter-spacing: -0.3px;
-        color: #1f1f1f;
+        color: #eceff2;
         margin-bottom: 8px;
       }
 
       .welcome-sub {
-        color: #6e6e6a;
+        color: #8f949c;
         font-size: 16px;
       }
 
-      /* Chat bubbles — Claude style (light, rounded, minimal) */
+      /* Chat bubbles — dark Claude style */
       .message {
         display: flex;
         margin-bottom: 24px;
@@ -276,20 +271,20 @@
       }
 
       .user-message .message-bubble {
-        background: #e8e8e6;
-        color: #1a1a1a;
+        background: #2c2c2e;
+        color: #f0f2f5;
         border-bottom-right-radius: 6px;
       }
 
       .assistant-message .message-bubble {
-        background: #f4f4f2;
-        color: #1f1f1f;
+        background: #1e1e20;
+        color: #e4e7ea;
         border-bottom-left-radius: 6px;
       }
 
-      /* Typing indicator (Claude subtle dots) */
+      /* Typing indicator dark */
       .typing-indicator {
-        background: #f4f4f2;
+        background: #1e1e20;
         padding: 12px 18px;
         border-radius: 24px;
         border-bottom-left-radius: 6px;
@@ -301,7 +296,7 @@
       .typing-indicator span {
         width: 7px;
         height: 7px;
-        background: #9c9c98;
+        background: #9ca3af;
         border-radius: 50%;
         display: inline-block;
         animation: pulse 1.4s infinite ease-in-out both;
@@ -327,25 +322,23 @@
         }
       }
 
-      /* Input area — exactly Claude's rounded card with shadow */
+      /* Input container — dark glass effect */
       .input-container {
         padding: 20px 20px 28px;
         background: linear-gradient(
           to bottom,
-          rgba(255, 255, 255, 0),
-          white 12%
+          rgba(15, 15, 16, 0),
+          #0a0a0c 18%
         );
       }
 
       .input-card {
         max-width: 780px;
         margin: 0 auto;
-        background: white;
-        border: 1px solid #e2e2df;
+        background: #18181a;
+        border: 1px solid #2e2e32;
         border-radius: 28px;
-        box-shadow:
-          0 4px 12px rgba(0, 0, 0, 0.02),
-          0 1px 2px rgba(0, 0, 0, 0.03);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         transition:
           box-shadow 0.2s,
           border-color 0.2s;
@@ -354,7 +347,7 @@
 
       .input-card:focus-within {
         border-color: #d97757;
-        box-shadow: 0 4px 16px rgba(217, 119, 87, 0.08);
+        box-shadow: 0 8px 24px rgba(217, 119, 87, 0.2);
       }
 
       .input-area-flex {
@@ -371,14 +364,14 @@
         font-family: inherit;
         outline: none;
         background: transparent;
-        color: #1f1f1f;
+        color: #eff1f3;
         min-height: 52px;
         max-height: 180px;
         line-height: 1.5;
       }
 
       .chat-input::placeholder {
-        color: #b3b3ae;
+        color: #5f656d;
         font-weight: 400;
       }
 
@@ -415,22 +408,22 @@
       }
 
       .attach-hint {
-        color: #aaa;
+        color: #6c727a;
         font-size: 12px;
         display: flex;
         gap: 8px;
       }
 
-      /* Mobile responsive: hide sidebar on small screens with toggle simulation */
+      /* Mobile sidebar dark */
       @media (max-width: 720px) {
         .sidebar {
           position: fixed;
           left: -280px;
           height: 100%;
           transition: left 0.25s ease;
-          box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
+          box-shadow: 2px 0 12px rgba(0, 0, 0, 0.6);
           z-index: 50;
-          background: #f9f9f8;
+          background: #131314;
         }
         .sidebar.mobile-open {
           left: 0;
@@ -440,29 +433,25 @@
         }
       }
 
-      /* Scrollbar */
+      /* Scrollbar dark */
       ::-webkit-scrollbar {
         width: 6px;
       }
       ::-webkit-scrollbar-track {
-        background: #f0f0ed;
+        background: #1f1f21;
       }
       ::-webkit-scrollbar-thumb {
-        background: #cccbc7;
+        background: #3e3e42;
         border-radius: 8px;
       }
 
+      /* ========= BROWSER SHELL (DARK MODE) ========= */
       .browser-shell {
         display: none;
         height: 100vh;
         width: 100%;
-        background: radial-gradient(
-          circle at top left,
-          rgba(255, 255, 255, 0.95),
-          rgba(244, 239, 234, 0.92) 42%,
-          rgba(232, 226, 218, 0.92) 100%
-        );
-        color: #1c1c1b;
+        background: radial-gradient(circle at top left, #17171a, #0b0b0d);
+        color: #dddfe2;
       }
 
       .browser-shell.active {
@@ -472,8 +461,8 @@
 
       .browser-topbar {
         padding: 8px 12px;
-        border-bottom: 1px solid rgba(93, 79, 64, 0.12);
-        background: rgba(250, 247, 242, 0.94);
+        border-bottom: 1px solid #2d2d30;
+        background: rgba(22, 22, 25, 0.96);
         backdrop-filter: blur(12px);
         display: flex;
         align-items: center;
@@ -496,13 +485,13 @@
       }
 
       .browser-nav-btn {
-        width: 20px;
-        height: 20px;
+        width: 28px;
+        height: 28px;
         border: none;
         border-radius: 50%;
         background: transparent;
-        color: #5f6368;
-        font-size: 16px;
+        color: #bcc0c6;
+        font-size: 18px;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -510,8 +499,16 @@
         transition: background 0.2s;
       }
 
+      .browser-nav-btn svg {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: #d2d6dc;
+        stroke-width: 2;
+      }
+
       .browser-nav-btn:hover {
-        background: #f1f3f4;
+        background: #2c2e33;
       }
 
       .browser-nav-btn:disabled {
@@ -523,18 +520,18 @@
         flex: 1;
         height: 40px;
         border-radius: 14px;
-        border: 1px solid rgba(157, 136, 116, 0.16);
-        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid #3a3c42;
+        background: #202124;
         padding: 0 16px;
         font-size: 14px;
-        color: #2f2822;
+        color: #eff1f4;
         outline: none;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
       }
 
       .browser-address-bar:focus {
-        border-color: rgba(24, 119, 242, 0.42);
-        box-shadow: 0 0 0 4px rgba(24, 119, 242, 0.08);
+        border-color: #d97757;
+        box-shadow: 0 0 0 4px rgba(217, 119, 87, 0.2);
       }
 
       .tab-strip {
@@ -547,47 +544,44 @@
       }
 
       .browser-tab {
-        min-width: 180px;
-        max-width: 240px;
+        min-width: 160px;
+        max-width: 220px;
         height: 38px;
-        padding: 0 10px 0 14px;
+        padding: 0 10px 0 12px;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         border: 1px solid transparent;
-        background: rgba(233, 225, 215, 0.78);
-        color: #64564a;
+        background: #222327;
+        color: #cbd0d6;
         display: inline-flex;
         align-items: center;
         gap: 10px;
         cursor: pointer;
-        transition:
-          background 0.18s ease,
-          border-color 0.18s ease,
-          transform 0.18s ease;
+        transition: all 0.18s ease;
         flex-shrink: 0;
       }
 
       .browser-tab:hover {
-        background: rgba(227, 218, 208, 0.95);
+        background: #2c2e33;
       }
 
       .browser-tab.active {
-        background: #ffffff;
-        border-color: rgba(157, 136, 116, 0.22);
-        color: #2f2822;
-        box-shadow: 0 10px 24px rgba(89, 70, 51, 0.08);
+        background: #0f0f12;
+        border-color: #3e3e44;
+        color: #f2f4f8;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
       }
 
       .tab-favicon {
         width: 18px;
         height: 18px;
         border-radius: 999px;
-        background: linear-gradient(135deg, #d97757, #9d5a42);
+        background: linear-gradient(135deg, #d97757, #b45b3b);
         color: #fff;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 700;
         flex-shrink: 0;
       }
@@ -595,7 +589,7 @@
       .tab-title {
         flex: 1;
         min-width: 0;
-        font-size: 13px;
+        font-size: 12.5px;
         font-weight: 500;
         white-space: nowrap;
         overflow: hidden;
@@ -606,9 +600,7 @@
       .tab-add {
         border: none;
         cursor: pointer;
-        transition:
-          background 0.18s ease,
-          transform 0.18s ease;
+        transition: all 0.18s ease;
       }
 
       .tab-close {
@@ -616,8 +608,8 @@
         height: 24px;
         border-radius: 999px;
         background: transparent;
-        color: inherit;
-        font-size: 15px;
+        color: #b9bfc7;
+        font-size: 16px;
         line-height: 1;
         flex-shrink: 0;
         display: flex;
@@ -626,22 +618,24 @@
       }
 
       .tab-close:hover {
-        background: rgba(120, 103, 88, 0.12);
+        background: #3f3f45;
+        color: #ffffff;
       }
 
       .tab-add {
         width: 38px;
         height: 38px;
-        border-radius: 7px;
-        background: #ffffff;
-        color: #53473c;
-        font-size: 22px;
-        box-shadow: 0 10px 24px rgba(89, 70, 51, 0.08);
+        border-radius: 10px;
+        background: #202127;
+        color: #dbdfe4;
+        font-size: 24px;
+        font-weight: 400;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         flex-shrink: 0;
       }
 
       .tab-add:hover {
-        background: #f8f3ee;
+        background: #2f3138;
       }
 
       @media (max-width: 980px) {
@@ -670,9 +664,8 @@
         inset: 0px;
         display: none;
         overflow: hidden;
-        background: #ffffff;
-        box-shadow: 0 16px 40px rgba(66, 49, 33, 0.12);
-        border: 1px solid rgba(133, 113, 93, 0.12);
+        background: #0e0e10;
+        border: none;
       }
 
       .browser-panel.active {
@@ -684,12 +677,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: radial-gradient(
-          circle at top,
-          rgba(233, 224, 214, 0.55),
-          rgba(255, 255, 255, 0.96) 48%
-        );
-        color: #53473c;
+        background: radial-gradient(circle at top, #141416, #0a0a0c);
+        color: #cbd2d9;
         text-align: center;
         padding: 24px;
       }
@@ -703,24 +692,26 @@
         font-weight: 600;
         letter-spacing: -0.03em;
         margin-bottom: 12px;
+        color: #eef2f5;
       }
 
       .browser-empty-copy {
         font-size: 15px;
         line-height: 1.6;
-        color: #786b5f;
+        color: #a8b0b8;
       }
 
       .browser-webview {
         width: 100%;
         height: 100%;
         border: 0;
+        background: #ffffff;
       }
     </style>
   </head>
   <body>
     <div class="app-container" id="workspaceApp">
-      <!-- Sidebar: Exactly like Claude's minimal left panel -->
+      <!-- Sidebar: Claude dark mode style -->
       <aside class="sidebar" id="sidebar">
         <div class="claude-brand">
           <div class="claude-icon">
@@ -811,19 +802,19 @@
         <div class="chat-history-area">
           <div class="history-label">RECENT CHATS</div>
           <div class="history-item" data-convo="Design inspiration">
-            🎨 Design inspiration
+            Design inspiration
           </div>
           <div class="history-item" data-convo="React hooks help">
-            ⚛️ React hooks help
+            React hooks help
           </div>
           <div class="history-item" data-convo="Marketing strategy">
-            📈 Marketing strategy
+            Marketing strategy
           </div>
         </div>
         <div class="user-footer">
           <div
             style="
-              background: #d97757;
+              background: #4f8ec9;
               width: 28px;
               height: 28px;
               border-radius: 50%;
@@ -834,23 +825,17 @@
               font-weight: 500;
             "
           >
-            C
+            A
           </div>
-          <div style="flex: 1">Claude Pro</div>
-          <div style="font-size: 12px">✨</div>
+          <div style="flex: 1">Adnan Hossain</div>
+          <!-- <div style="font-size: 12px">🌙</div> -->
         </div>
       </aside>
 
       <!-- Main Chat Interface -->
       <main class="main-chat">
-        <header class="chat-header">
-          <div class="model-badge">Claude 3.5 Sonnet</div>
-          <div class="plan-tag">Pro Plan</div>
-        </header>
-
         <div class="messages-container" id="messagesContainer">
           <div class="messages-inner" id="messagesInner">
-            <!-- Welcome screen (default) -->
             <div class="welcome-greeting" id="welcomeScreen">
               <div class="claude-wave">👋</div>
               <div class="welcome-title">How can I help you today?</div>
@@ -858,7 +843,6 @@
                 Ask me anything — I'm Claude, an AI assistant from Anthropic.
               </div>
             </div>
-            <!-- Dynamic messages will appear here -->
           </div>
         </div>
 
@@ -872,9 +856,7 @@
                 placeholder="Ask anything..."
               ></textarea>
               <div class="input-actions">
-                <div class="attach-hint">
-                  <span>⌘ ⏎</span>
-                </div>
+                <div class="attach-hint"><span>⌘ ⏎</span></div>
                 <button class="send-button" id="sendBtn">
                   <svg
                     width="18"
@@ -905,18 +887,13 @@
             type="button"
             aria-label="Go back"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="800px"
-              height="800px"
-              viewBox="0 0 1024 1024"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
               <path
-                fill="#000000"
+                fill="currentColor"
                 d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"
               />
               <path
-                fill="#000000"
+                fill="currentColor"
                 d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
               />
             </svg>
@@ -929,11 +906,9 @@
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="800px"
-              height="800px"
               viewBox="0 0 64 64"
-              stroke-width="3"
-              stroke="#000000"
+              stroke-width="2.5"
+              stroke="currentColor"
               fill="none"
             >
               <line x1="55.78" y1="32.63" x2="10.33" y2="32.63" />
@@ -973,9 +948,7 @@
     </section>
 
     <script>
-      // Claude clone - fully functional chat simulation with rich UX, pure Claude aesthetic
       (function () {
-        // DOM elements
         const messagesContainer = document.getElementById("messagesContainer");
         const messagesInner = document.getElementById("messagesInner");
         const welcomeScreenDiv = document.getElementById("welcomeScreen");
@@ -995,35 +968,24 @@
         const forwardBtn = document.getElementById("forwardBtn");
         const reloadBtn = document.getElementById("reloadBtn");
 
-        // State
-        let currentMessages = []; // store message objects { role, content }
+        let currentMessages = [];
         let isTyping = false;
-        let typingTimeout = null;
-        let isBrowserMode = false;
         let browserTabs = [];
         let activeTabId = null;
         let nextTabId = 1;
         const browserHomeUrl = "https://www.google.com/";
 
-        // Helper: remove welcome screen if any messages exist
         function updateWelcomeVisibility() {
-          if (currentMessages.length === 0) {
-            if (!welcomeScreenDiv) return;
-            welcomeScreenDiv.style.display = "block";
-          } else {
-            if (welcomeScreenDiv) welcomeScreenDiv.style.display = "none";
-          }
+          if (welcomeScreenDiv)
+            welcomeScreenDiv.style.display =
+              currentMessages.length === 0 ? "block" : "none";
         }
 
-        // Render all messages from currentMessages array (Claude style)
         function renderMessages() {
           if (!messagesInner) return;
-          // Keep welcome screen element but we manage visibility
-          const existingMessages = messagesInner.querySelectorAll(
-            ".message:not(.welcome-greeting)",
-          );
-          existingMessages.forEach((el) => el.remove());
-
+          document
+            .querySelectorAll(".message:not(.welcome-greeting)")
+            .forEach((el) => el.remove());
           for (let msg of currentMessages) {
             const messageDiv = document.createElement("div");
             messageDiv.className = `message ${msg.role === "user" ? "user-message" : "assistant-message"}`;
@@ -1033,17 +995,14 @@
             messageDiv.appendChild(bubble);
             messagesInner.appendChild(messageDiv);
           }
-          // scroll to bottom after render
           scrollToBottom();
         }
 
         function scrollToBottom() {
-          if (messagesContainer) {
+          if (messagesContainer)
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
-          }
         }
 
-        // Add a message (updates state & re-renders)
         function addMessage(role, content) {
           currentMessages.push({ role, content });
           renderMessages();
@@ -1051,66 +1010,51 @@
           scrollToBottom();
         }
 
-        // Simulate Claude's thinking + response
         async function sendToClaude(userMessage) {
-          // Add user message instantly
           addMessage("user", userMessage);
           chatInput.value = "";
           autoResizeTextarea();
-
-          // Show typing indicator
           showTypingIndicator();
-
-          // Simulate network delay with intelligent, coherent claude-like answer
           await new Promise((resolve) =>
-            setTimeout(resolve, 800 + Math.random() * 500),
+            setTimeout(resolve, 700 + Math.random() * 400),
           );
-
-          // Claude responses — rich, helpful, natural
           const lowerMsg = userMessage.toLowerCase();
           let replyText = "";
-
           if (
             lowerMsg.includes("hello") ||
             lowerMsg.includes("hi") ||
             lowerMsg.includes("hey")
-          ) {
+          )
             replyText =
               "Hello! 👋 I'm Claude, an AI assistant from Anthropic. How can I help you today? Feel free to ask me anything—coding, writing, analysis, or just brainstorming.";
-          } else if (lowerMsg.includes("how are you")) {
+          else if (lowerMsg.includes("how are you"))
             replyText =
               "I'm functioning beautifully, thank you for asking! Ready to assist with whatever you're working on. What's on your mind?";
-          } else if (
+          else if (
             lowerMsg.includes("code") ||
             lowerMsg.includes("javascript") ||
             lowerMsg.includes("react")
-          ) {
+          )
             replyText =
               "I'd be glad to help with code! I have expertise in many languages. Could you give me more specific details or share a snippet you're working with? I can explain concepts, debug, or generate examples.";
-          } else if (
+          else if (
             lowerMsg.includes("claude") &&
             (lowerMsg.includes("you") || lowerMsg.includes("who"))
-          ) {
+          )
             replyText =
-              "I'm Claude, an AI assistant built by Anthropic. I'm designed to be helpful, harmless, and honest. I can process large contexts, analyze files, and assist with complex reasoning. How can I assist you further?";
-          } else if (
+              "I'm Claude, an AI assistant built by Anthropic. Designed to be helpful, harmless, and honest. I can process large contexts, analyze files, and assist with complex reasoning. How can I assist you further?";
+          else if (
             lowerMsg.includes("thanks") ||
             lowerMsg.includes("thank you")
-          ) {
+          )
             replyText =
               "You're very welcome! 😊 I'm glad I could help. Let me know if there's anything else you'd like to explore.";
-          } else if (lowerMsg.trim() === "") {
-            replyText =
-              "I'm here to help! Feel free to ask me a question or share what you're working on.";
-          } else {
-            replyText = `That's an interesting question. Let me think... ${userMessage}\n\nHere's my response: I notice you're asking about "${userMessage.substring(0, 60)}...". As Claude, I aim to provide clear, helpful information. Could you share a bit more context? I'm ready to dive deeper into any topic—from creative writing to technical documentation or strategic advice.`;
-          }
-
+          else
+            replyText = `That's an interesting question. Let me think...\n\nHere's my response: I notice you're asking about "${userMessage.substring(0, 60)}..." . As Claude, I aim to provide clear, helpful information. Could you share a bit more context? I'm ready to dive deeper into any topic—from creative writing to technical documentation or strategic advice.`;
           removeTypingIndicator();
           addMessage("assistant", replyText);
         }
 
-        // Typing indicator logic
         function showTypingIndicator() {
           if (isTyping) return;
           isTyping = true;
@@ -1121,21 +1065,17 @@
           messagesInner.appendChild(typingDiv);
           scrollToBottom();
         }
-
         function removeTypingIndicator() {
-          const indicator = document.getElementById("typingIndicator");
-          if (indicator) indicator.remove();
+          const el = document.getElementById("typingIndicator");
+          if (el) el.remove();
           isTyping = false;
         }
 
-        // Handle send action
         async function handleSend() {
           const message = chatInput.value.trim();
           if (!message || isTyping) return;
           await sendToClaude(message);
         }
-
-        // Reset chat to new conversation (clear history, welcome back)
         function newChat() {
           if (isTyping) return;
           currentMessages = [];
@@ -1143,16 +1083,13 @@
           updateWelcomeVisibility();
           chatInput.value = "";
           autoResizeTextarea();
-          // Focus input for smooth UX
           chatInput.focus();
-          // remove any leftover indicators
           removeTypingIndicator();
         }
 
-        // Load history demo (just example — replace current conversation)
         function loadHistoryConversation(topic) {
           if (isTyping) return;
-          newChat(); // reset first
+          newChat();
           let demoQuestion = "",
             demoAnswer = "";
           if (topic.includes("Design inspiration")) {
@@ -1169,9 +1106,7 @@
               "What's a good go-to-market strategy for a SaaS product?";
             demoAnswer =
               "For a B2B SaaS, focus on a product-led growth model. Start with a freemium tier, build case studies, leverage content marketing (SEO and thought leadership), and run targeted LinkedIn campaigns. Use early adopter feedback to refine your ICP. Claude recommends iterating based on user data and creating a referral loop.";
-          } else {
-            return;
-          }
+          } else return;
           addMessage("user", demoQuestion);
           showTypingIndicator();
           setTimeout(() => {
@@ -1180,84 +1115,47 @@
           }, 700);
         }
 
-        // Auto-resize textarea
         function autoResizeTextarea() {
-          const textarea = chatInput;
-          textarea.style.height = "auto";
-          const newHeight = Math.min(textarea.scrollHeight, 140);
-          textarea.style.height = newHeight + "px";
+          const ta = chatInput;
+          ta.style.height = "auto";
+          ta.style.height = Math.min(ta.scrollHeight, 140) + "px";
         }
-
         function getActiveTab() {
           return browserTabs.find((tab) => tab.id === activeTabId) || null;
         }
-
         function normalizeBrowserInput(input) {
-          const value = input.trim();
-          if (!value) {
-            return browserHomeUrl;
-          }
-
-          if (/^https?:\/\//i.test(value)) {
-            return value;
-          }
-
-          if (/^(localhost[:/]|[\w-]+\.[\w.-]{2,})(\/.*)?$/i.test(value)) {
-            return `https://${value}`;
-          }
-
-          return `https://www.google.com/search?q=${encodeURIComponent(value)}`;
+          const val = input.trim();
+          if (!val) return browserHomeUrl;
+          if (/^https?:\/\//i.test(val)) return val;
+          if (/^(localhost[:/]|[\w-]+\.[\w.-]{2,})(\/.*)?$/i.test(val))
+            return `https://${val}`;
+          return `https://www.google.com/search?q=${encodeURIComponent(val)}`;
         }
-
-        function formatAddress(url) {
-          if (!url) {
-            return "";
-          }
-
-          try {
-            const parsedUrl = new URL(url);
-            return parsedUrl.href;
-          } catch (error) {
-            return url;
-          }
-        }
-
         function getTabIconText(url) {
-          if (!url) {
-            return "N";
-          }
-
           try {
             const hostname = new URL(url).hostname.replace(/^www\./i, "");
             return hostname.charAt(0).toUpperCase() || "W";
-          } catch (error) {
+          } catch (e) {
             return "W";
           }
         }
-
         function updateAddressBar() {
           const activeTab = getActiveTab();
           addressBar.value = activeTab
-            ? activeTab.pendingInput || formatAddress(activeTab.url)
+            ? activeTab.pendingInput || activeTab.url
             : "";
         }
-
         function updateNavButtons() {
           const activeTab = getActiveTab();
           const hasActiveTab = Boolean(activeTab);
-
-          backBtn.disabled = !hasActiveTab || !activeTab.canGoBack;
-          forwardBtn.disabled = !hasActiveTab || !activeTab.canGoForward;
+          backBtn.disabled = !hasActiveTab || !activeTab?.canGoBack;
+          forwardBtn.disabled = !hasActiveTab || !activeTab?.canGoForward;
           reloadBtn.disabled = !hasActiveTab;
           addressBar.disabled = !hasActiveTab;
         }
-
         function navigateActiveTab(rawInput) {
           const activeTab = getActiveTab();
-          if (!activeTab) {
-            return;
-          }
-
+          if (!activeTab) return;
           const nextUrl = normalizeBrowserInput(rawInput);
           activeTab.pendingInput = "";
           activeTab.title = "Loading...";
@@ -1269,123 +1167,81 @@
           renderBrowserTabs();
         }
 
-        function setBrowserMode(nextMode) {
-          isBrowserMode = !!nextMode;
-          workspaceApp.classList.toggle("hidden", isBrowserMode);
-          browserShell.classList.toggle("active", isBrowserMode);
-
-          if (isBrowserMode) {
-            if (browserTabs.length === 0) {
-              createBrowserTab();
-            } else {
-              const activeTab = browserTabs.find(
-                (tab) => tab.id === activeTabId,
-              );
-              if (activeTab && !activeTab.url) {
-                addressBar.focus();
-              } else if (
-                activeTab &&
-                activeTab.webview &&
-                typeof activeTab.webview.focus === "function"
-              ) {
-                activeTab.webview.focus();
-              }
-            }
-            updateAddressBar();
-            updateNavButtons();
-          } else {
-            chatInput.focus();
-          }
-        }
-
         function renderBrowserTabs() {
-          tabStrip
+          document
             .querySelectorAll(".browser-tab")
-            .forEach((element) => element.remove());
-
+            .forEach((el) => el.remove());
           browserTabs.forEach((tab) => {
             const tabButton = document.createElement("button");
             tabButton.type = "button";
             tabButton.className = `browser-tab${tab.id === activeTabId ? " active" : ""}`;
-
             const favicon = document.createElement("span");
             favicon.className = "tab-favicon";
             favicon.textContent = tab.iconText || "W";
-
             const title = document.createElement("span");
             title.className = "tab-title";
             title.textContent = tab.title;
-
             const closeIcon = document.createElement("span");
             closeIcon.className = "tab-close";
-            closeIcon.setAttribute("aria-hidden", "true");
             closeIcon.innerHTML = "&times;";
-
             tabButton.appendChild(favicon);
             tabButton.appendChild(title);
             tabButton.appendChild(closeIcon);
-
-            tabButton.addEventListener("click", () => {
-              activateBrowserTab(tab.id);
-            });
-
-            closeIcon.addEventListener("click", (event) => {
-              event.stopPropagation();
+            tabButton.addEventListener("click", () =>
+              activateBrowserTab(tab.id),
+            );
+            closeIcon.addEventListener("click", (e) => {
+              e.stopPropagation();
               closeBrowserTab(tab.id);
             });
-
             tabStrip.insertBefore(tabButton, newTabBtn);
           });
         }
-
         function activateBrowserTab(tabId) {
           activeTabId = tabId;
-
           browserTabs.forEach((tab) => {
             tab.panel.classList.toggle("active", tab.id === tabId);
           });
-
           renderBrowserTabs();
-
-          const activeTab = browserTabs.find((tab) => tab.id === tabId);
-          if (activeTab && !activeTab.url) {
-            addressBar.focus();
-          } else if (
-            activeTab &&
-            activeTab.webview &&
-            typeof activeTab.webview.focus === "function"
-          ) {
-            activeTab.webview.focus();
-          }
+          const activeTab = getActiveTab();
+          if (activeTab && !activeTab.url) addressBar.focus();
+          else if (activeTab?.webview?.focus) activeTab.webview.focus();
           updateAddressBar();
           updateNavButtons();
         }
-
         function createBrowserTab() {
           const tabId = nextTabId++;
           const panel = document.createElement("div");
           panel.className = "browser-panel";
           panel.dataset.tabId = String(tabId);
-
           const emptyState = document.createElement("div");
           emptyState.className = "browser-empty-state";
-          emptyState.innerHTML = `
-        <div class="browser-empty-card">
-          <div class="browser-empty-title">New Tab</div>
-          <div class="browser-empty-copy">Enter the website URL in the address bar, or type anything and press Enter to open the search results.</div>
-        </div>
-      `;
-
+          emptyState.innerHTML = `<div class="browser-empty-card"><div class="browser-empty-title">New Tab</div><div class="browser-empty-copy">Enter the website URL in the address bar, or type anything and press Enter to open the search results.</div></div>`;
           const webview = document.createElement("webview");
           webview.className = "browser-webview hidden";
           webview.setAttribute("allowpopups", "");
           webview.setAttribute("partition", "persist:workspace-browser");
           webview.setAttribute("useragent", navigator.userAgent);
-
           panel.appendChild(emptyState);
           panel.appendChild(webview);
           browserPanels.appendChild(panel);
-
+          const syncTabState = () => {
+            tab.url = webview.getURL();
+            tab.canGoBack = webview.canGoBack();
+            tab.canGoForward = webview.canGoForward();
+            tab.iconText = getTabIconText(tab.url);
+            renderBrowserTabs();
+            if (tab.id === activeTabId) {
+              updateAddressBar();
+              updateNavButtons();
+            }
+          };
+          webview.addEventListener("page-title-updated", (e) => {
+            tab.title = e.title || "New Tab";
+            renderBrowserTabs();
+          });
+          webview.addEventListener("did-stop-loading", syncTabState);
+          webview.addEventListener("did-navigate", syncTabState);
           const tab = {
             id: tabId,
             title: "New Tab",
@@ -1398,73 +1254,34 @@
             webview,
             emptyState,
           };
-
-          const syncTabState = () => {
-            tab.url = webview.getURL();
-            tab.canGoBack = webview.canGoBack();
-            tab.canGoForward = webview.canGoForward();
-            tab.iconText = getTabIconText(tab.url);
-            renderBrowserTabs();
-
-            if (tab.id === activeTabId) {
-              updateAddressBar();
-              updateNavButtons();
-            }
-          };
-
-          webview.addEventListener("page-title-updated", (event) => {
-            tab.title = event.title || "New Tab";
-            renderBrowserTabs();
-          });
-
-          webview.addEventListener("did-start-loading", () => {
-            syncTabState();
-          });
-
-          webview.addEventListener("did-stop-loading", () => {
-            syncTabState();
-          });
-
-          webview.addEventListener("did-navigate", () => {
-            syncTabState();
-          });
-
-          webview.addEventListener("did-navigate-in-page", () => {
-            syncTabState();
-          });
-
-          webview.addEventListener("did-fail-load", () => {
-            tab.title = "Page failed";
-            renderBrowserTabs();
-            syncTabState();
-          });
-
           browserTabs.push(tab);
           activateBrowserTab(tabId);
         }
-
         function closeBrowserTab(tabId) {
-          const closingIndex = browserTabs.findIndex((tab) => tab.id === tabId);
-          if (closingIndex === -1) return;
-
-          const closingTab = browserTabs[closingIndex];
-          closingTab.panel.remove();
-          browserTabs.splice(closingIndex, 1);
-
+          const idx = browserTabs.findIndex((t) => t.id === tabId);
+          if (idx === -1) return;
+          browserTabs[idx].panel.remove();
+          browserTabs.splice(idx, 1);
           if (browserTabs.length === 0) {
             activeTabId = null;
             renderBrowserTabs();
             updateAddressBar();
             updateNavButtons();
-            return;
+          } else {
+            const fallback =
+              browserTabs[Math.max(0, idx - 1)] || browserTabs[0];
+            activateBrowserTab(fallback.id);
           }
-
-          const fallbackTab =
-            browserTabs[Math.max(0, closingIndex - 1)] || browserTabs[0];
-          activateBrowserTab(fallbackTab.id);
+        }
+        function setBrowserMode(nextMode) {
+          workspaceApp.classList.toggle("hidden", !!nextMode);
+          browserShell.classList.toggle("active", !!nextMode);
+          if (nextMode && browserTabs.length === 0) createBrowserTab();
+          else if (!nextMode) chatInput.focus();
+          updateAddressBar();
+          updateNavButtons();
         }
 
-        // Event listeners
         sendBtn.addEventListener("click", handleSend);
         chatInput.addEventListener("keydown", (e) => {
           if (e.key === "Enter" && !e.shiftKey) {
@@ -1473,119 +1290,72 @@
           }
         });
         chatInput.addEventListener("input", autoResizeTextarea);
-
         newChatBtn.addEventListener("click", newChat);
         newTabBtn.addEventListener("click", createBrowserTab);
-
-        addressBar.addEventListener("input", () => {
-          const activeTab = getActiveTab();
-          if (!activeTab) {
-            return;
-          }
-
-          activeTab.pendingInput = addressBar.value;
-        });
-
-        addressBar.addEventListener("keydown", (event) => {
-          if (event.key === "Enter") {
-            event.preventDefault();
+        addressBar.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
             navigateActiveTab(addressBar.value);
           }
         });
-
         backBtn.addEventListener("click", () => {
-          const activeTab = getActiveTab();
-          if (activeTab && activeTab.canGoBack) {
-            activeTab.webview.goBack();
-          }
+          const tab = getActiveTab();
+          if (tab?.canGoBack) tab.webview.goBack();
         });
-
         forwardBtn.addEventListener("click", () => {
-          const activeTab = getActiveTab();
-          if (activeTab && activeTab.canGoForward) {
-            activeTab.webview.goForward();
-          }
+          const tab = getActiveTab();
+          if (tab?.canGoForward) tab.webview.goForward();
         });
-
         reloadBtn.addEventListener("click", () => {
-          const activeTab = getActiveTab();
-          if (!activeTab) {
-            return;
-          }
-
-          if (!activeTab.url) {
-            navigateActiveTab(browserHomeUrl);
-            return;
-          }
-
-          activeTab.webview.reload();
+          const tab = getActiveTab();
+          if (!tab) return;
+          if (!tab.url) navigateActiveTab(browserHomeUrl);
+          else tab.webview.reload();
         });
-
-        // History items click
-        historyItems.forEach((item) => {
-          item.addEventListener("click", (e) => {
-            const conversationName =
-              item.getAttribute("data-convo") || item.innerText;
-            loadHistoryConversation(conversationName);
-            // For mobile, close sidebar after click
-            if (window.innerWidth <= 720) {
+        historyItems.forEach((item) =>
+          item.addEventListener("click", () => {
+            const name = item.getAttribute("data-convo") || item.innerText;
+            loadHistoryConversation(name);
+            if (window.innerWidth <= 720)
               document
                 .getElementById("sidebar")
-                .classList.remove("mobile-open");
-            }
-          });
-        });
-
-        // Settings button small toast effect
-        settingsBtn.addEventListener("click", () => {
+                ?.classList.remove("mobile-open");
+          }),
+        );
+        settingsBtn.addEventListener("click", () =>
           addMessage(
             "assistant",
-            "⚙️ Settings panel would appear here (Claude clone). You could adjust theme, preferences, and API settings in the full version. For now, enjoy the Claude aesthetic!",
-          );
-        });
-        historyBtn.addEventListener("click", () => {
+            "⚙️ Settings panel would appear here (Claude clone). You could adjust theme, preferences, and API settings in the full version. For now, enjoy the Claude dark aesthetic!",
+          ),
+        );
+        historyBtn.addEventListener("click", () =>
           addMessage(
             "assistant",
-            "📋 Your chat history will be stored locally here. Click any recent chat from the left sidebar to load a demo conversation. This clone mimics Claude's UI beautifully.",
-          );
-        });
-
-        if (
-          window.electronAPI &&
-          typeof window.electronAPI.toggle === "function"
-        ) {
-          window.electronAPI.toggle((nextMode) => {
-            setBrowserMode(nextMode);
-          });
+            "📋 Your chat history will be stored locally here. Click any recent chat from the left sidebar to load a demo conversation. This clone mimics Claude's UI beautifully in dark mode.",
+          ),
+        );
+        if (window.electronAPI?.toggle)
+          window.electronAPI.toggle(setBrowserMode);
+        if (window.innerWidth <= 720) {
+          const header = document.querySelector(".chat-header");
+          if (header) {
+            const menuIcon = document.createElement("div");
+            menuIcon.innerHTML =
+              '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e2e6ea" stroke-width="1.8"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+            menuIcon.style.cursor = "pointer";
+            menuIcon.style.marginRight = "12px";
+            header.insertBefore(menuIcon, header.firstChild);
+            menuIcon.addEventListener("click", () =>
+              document
+                .getElementById("sidebar")
+                ?.classList.toggle("mobile-open"),
+            );
+          }
         }
-
-        // Mobile sidebar toggle hamburger? we create subtle doubletap on header? but emulate claude: we add invisible menu? but user knows.
-        // Add a menu button for mobile: Because Claude web has no hamburger but we can improve UX
-        const header = document.querySelector(".chat-header");
-        if (header && window.innerWidth <= 720) {
-          const menuIcon = document.createElement("div");
-          menuIcon.innerHTML =
-            '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3c3c3c" stroke-width="1.8"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
-          menuIcon.style.cursor = "pointer";
-          menuIcon.style.marginRight = "12px";
-          menuIcon.style.display = "flex";
-          header.insertBefore(menuIcon, header.firstChild);
-          menuIcon.addEventListener("click", (e) => {
-            const sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("mobile-open");
-          });
-        }
-
-        // initial auto-focus
         chatInput.focus();
-
-        // Resize observer for initial placeholder style
         autoResizeTextarea();
         renderBrowserTabs();
         updateNavButtons();
-
-        // Optionally, show extremely accurate clone look-n-feel
-        console.log("Claude clone ready — perfect copycat UI");
       })();
     </script>
   </body>
