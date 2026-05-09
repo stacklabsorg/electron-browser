@@ -1,4 +1,4 @@
-const { app, BrowserWindow, globalShortcut } = require("electron");
+const { app, BrowserWindow, globalShortcut, session } = require("electron");
 const path = require("path");
 
 let win;
@@ -19,12 +19,28 @@ function createWindow() {
   });
 
   win.loadFile("index.html");
+
+  win.on("minimize", () => {
+    if (isFB) {
+      isFB = false;
+      win.webContents.send("toggle-view", false);
+    }
+  });
 }
 
 app.whenReady().then(() => {
   createWindow();
 
-  // 🔥 IMPORTANT: wait a bit before shortcut register
+  session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
+    const denied = ["usb", "hid", "serial", "midi", "midiSysex", "mediaKeySystem"];
+    callback(!denied.includes(permission));
+  });
+
+  session.defaultSession.setPermissionCheckHandler((webContents, permission) => {
+    const denied = ["usb", "hid", "serial", "midi", "midiSysex", "mediaKeySystem"];
+    return !denied.includes(permission);
+  });
+
   setTimeout(() => {
     const success = globalShortcut.register("CommandOrControl+Space", () => {
       if (!win) return;
