@@ -1,6 +1,8 @@
 const { app, BrowserWindow, globalShortcut, session } = require("electron");
 const path = require("path");
 
+app.commandLine.appendSwitch("disable-features", "WebAuthentication");
+
 let win;
 let isFB = false;
 

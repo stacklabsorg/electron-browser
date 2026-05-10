@@ -1222,6 +1222,7 @@
           webview.setAttribute("allowpopups", "");
           webview.setAttribute("partition", "persist:workspace-browser");
           webview.setAttribute("useragent", navigator.userAgent);
+          webview.setAttribute("disableblinkfeatures", "WebAuthn");
           panel.appendChild(emptyState);
           panel.appendChild(webview);
           browserPanels.appendChild(panel);
@@ -1242,6 +1243,17 @@
           });
           webview.addEventListener("did-stop-loading", syncTabState);
           webview.addEventListener("did-navigate", syncTabState);
+          webview.addEventListener("dom-ready", () => {
+            webview.executeJavaScript(`
+              try {
+                Object.defineProperty(navigator, 'credentials', {
+                  get() { return undefined; },
+                  configurable: false,
+                  enumerable: true
+                });
+              } catch(e) {}
+            `);
+          });
           const tab = {
             id: tabId,
             title: "New Tab",
