@@ -445,13 +445,13 @@
         border-radius: 8px;
       }
 
-      /* ========= BROWSER SHELL (DARK MODE) ========= */
+      /* ========= CHROME-LIKE BROWSER SHELL ========= */
       .browser-shell {
         display: none;
         height: 100vh;
         width: 100%;
-        background: radial-gradient(circle at top left, #17171a, #0b0b0d);
-        color: #dddfe2;
+        background: #1a1a1e;
+        color: #e8eaed;
       }
 
       .browser-shell.active {
@@ -459,253 +459,291 @@
         flex-direction: column;
       }
 
-      .browser-topbar {
-        padding: 8px 12px;
-        border-bottom: 1px solid #2d2d30;
-        background: rgba(22, 22, 25, 0.96);
-        backdrop-filter: blur(12px);
+      /* --- Tab Strip (Chrome-style, topmost) --- */
+      .browser-tabstrip {
         display: flex;
-        align-items: center;
-        gap: 10px;
+        align-items: flex-end;
+        background: #1e1e22;
+        padding: 0 8px;
+        height: 40px;
+        flex-shrink: 0;
+        overflow: hidden;
+        gap: 0;
+        min-width: 0;
       }
 
-      .browser-controls {
+      .tab-scroll {
+        display: flex;
+        align-items: flex-end;
+        gap: 2px;
+        overflow-x: auto;
+        flex: 1;
+        min-width: 0;
+        height: 40px;
+        scrollbar-width: none;
+      }
+      .tab-scroll::-webkit-scrollbar { display: none; }
+
+      .browser-tab {
+        min-width: 140px;
+        max-width: 220px;
+        height: 34px;
+        padding: 0 8px 0 14px;
+        border: none;
+        background: #28282e;
+        color: #9aa0a6;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: default;
+        flex-shrink: 0;
+        font-size: 12px;
+        font-family: inherit;
+        position: relative;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        transition: none;
+        user-select: none;
+        align-self: flex-end;
+      }
+      .browser-tab:not(.active) {
+        margin-bottom: 2px;
+      }
+
+      .browser-tab:hover {
+        background: #323238;
+      }
+
+      .browser-tab.active {
+        background: #1a1a1e;
+        color: #e8eaed;
+        height: 36px;
+        z-index: 2;
+      }
+
+      .tab-favicon {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #3c4043;
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        font-weight: 700;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+      .tab-favicon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .tab-title {
+        flex: 1;
+        min-width: 0;
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: inherit;
+      }
+
+      .tab-close {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: none;
+        background: transparent;
+        color: #9aa0a6;
+        font-size: 14px;
+        line-height: 1;
+        flex-shrink: 0;
         display: flex;
         align-items: center;
-        gap: 10px;
-        flex: 1;
-        min-width: 320px;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.12s;
+      }
+      .browser-tab:hover .tab-close,
+      .browser-tab.active .tab-close {
+        opacity: 1;
+      }
+      .tab-close:hover {
+        background: #3f3f45;
+        color: #fff;
+      }
+
+      .tab-add {
+        width: 30px;
+        height: 30px;
+        border: none;
+        border-radius: 50%;
+        background: transparent;
+        color: #9aa0a6;
+        font-size: 20px;
+        cursor: pointer;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        margin: 0 4px;
+        transition: background 0.15s;
+      }
+      .tab-add:hover {
+        background: #323238;
+      }
+
+      /* --- Toolbar (Chrome-style, below tabs) --- */
+      .browser-toolbar {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 12px;
+        background: #1a1a1e;
+        border-bottom: 1px solid #2d2d30;
+        flex-shrink: 0;
+        height: 44px;
       }
 
       .browser-nav-group {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 2px;
         flex-shrink: 0;
       }
 
       .browser-nav-btn {
-        width: 28px;
-        height: 28px;
+        width: 30px;
+        height: 30px;
         border: none;
         border-radius: 50%;
         background: transparent;
-        color: #bcc0c6;
-        font-size: 18px;
+        color: #9aa0a6;
+        font-size: 16px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: background 0.2s;
+        transition: background 0.15s;
+      }
+      .browser-nav-btn:hover {
+        background: #2c2e33;
+      }
+      .browser-nav-btn:disabled {
+        opacity: 0.35;
+        cursor: default;
+      }
+      .browser-nav-btn:disabled:hover {
+        background: transparent;
       }
 
       .browser-nav-btn svg {
         width: 18px;
         height: 18px;
         fill: none;
-        stroke: #d2d6dc;
+        stroke: currentColor;
         stroke-width: 2;
-      }
-
-      .browser-nav-btn:hover {
-        background: #2c2e33;
-      }
-
-      .browser-nav-btn:disabled {
-        opacity: 0.4;
-        cursor: default;
       }
 
       .browser-address-bar {
         flex: 1;
-        height: 40px;
-        border-radius: 14px;
-        border: 1px solid #3a3c42;
-        background: #202124;
-        padding: 0 16px;
-        font-size: 14px;
-        color: #eff1f4;
-        outline: none;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
-      }
-
-      .browser-address-bar:focus {
-        border-color: #d97757;
-        box-shadow: 0 0 0 4px rgba(217, 119, 87, 0.2);
-      }
-
-      .tab-strip {
-        display: flex;
-        align-items: center;
-        gap: 2px;
-        overflow-x: auto;
-        flex: 1;
-        min-width: 0;
-      }
-
-      .browser-tab {
-        min-width: 160px;
-        max-width: 220px;
-        height: 38px;
-        padding: 0 10px 0 12px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        border: 1px solid transparent;
-        background: #222327;
-        color: #cbd0d6;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        cursor: pointer;
-        transition: all 0.18s ease;
-        flex-shrink: 0;
-      }
-
-      .browser-tab:hover {
-        background: #2c2e33;
-      }
-
-      .browser-tab.active {
-        background: #0f0f12;
-        border-color: #3e3e44;
-        color: #f2f4f8;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      }
-
-      .tab-favicon {
-        width: 18px;
-        height: 18px;
-        border-radius: 999px;
-        background: linear-gradient(135deg, #d97757, #b45b3b);
-        color: #fff;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 10px;
-        font-weight: 700;
-        flex-shrink: 0;
-      }
-
-      .tab-title {
-        flex: 1;
-        min-width: 0;
-        font-size: 12.5px;
-        font-weight: 500;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .tab-close,
-      .tab-add {
+        height: 32px;
+        border-radius: 20px;
         border: none;
-        cursor: pointer;
-        transition: all 0.18s ease;
+        background: #2c2c32;
+        padding: 0 14px;
+        font-size: 13px;
+        color: #e8eaed;
+        outline: none;
+        margin: 0 6px;
+        font-family: inherit;
       }
-
-      .tab-close {
-        width: 24px;
-        height: 24px;
-        border-radius: 999px;
-        background: transparent;
-        color: #b9bfc7;
-        font-size: 16px;
-        line-height: 1;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .tab-close:hover {
-        background: #3f3f45;
-        color: #ffffff;
-      }
-
-      .tab-add {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        background: #202127;
-        color: #dbdfe4;
-        font-size: 24px;
-        font-weight: 400;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        flex-shrink: 0;
-      }
-
-      .tab-add:hover {
-        background: #2f3138;
-      }
-
-      @media (max-width: 980px) {
-        .browser-topbar {
-          flex-wrap: wrap;
-        }
-
-        .tab-strip {
-          order: 1;
-          width: 100%;
-        }
-
-        .browser-controls {
-          order: 2;
-          width: 100%;
-        }
+      .browser-address-bar:focus {
+        background: #35353b;
+        outline: 1px solid #5f6368;
       }
 
       .browser-panels {
         flex: 1;
         position: relative;
+        background: #1a1a1e;
       }
 
       .browser-panel {
         position: absolute;
-        inset: 0px;
+        inset: 0;
         display: none;
         overflow: hidden;
-        background: #0e0e10;
-        border: none;
+        background: #fff;
       }
-
       .browser-panel.active {
-        display: block;
+        display: flex;
+        flex-direction: column;
       }
 
       .browser-empty-state {
-        height: 100%;
+        flex: 1;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: radial-gradient(circle at top, #141416, #0a0a0c);
-        color: #cbd2d9;
+        background: #1a1a1e;
+        color: #9aa0a6;
         text-align: center;
         padding: 24px;
       }
-
       .browser-empty-card {
-        max-width: 520px;
+        max-width: 480px;
       }
-
       .browser-empty-title {
-        font-size: 30px;
-        font-weight: 600;
-        letter-spacing: -0.03em;
-        margin-bottom: 12px;
-        color: #eef2f5;
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: #e8eaed;
       }
-
       .browser-empty-copy {
-        font-size: 15px;
+        font-size: 13px;
         line-height: 1.6;
-        color: #a8b0b8;
+        color: #9aa0a6;
       }
 
       .browser-webview {
         width: 100%;
         height: 100%;
         border: 0;
-        background: #ffffff;
+        background: #fff;
+        flex: 1;
+      }
+
+      .browser-loading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        z-index: 5;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .browser-loading.hidden {
+        display: none;
+      }
+      .browser-loading::after {
+        content: '';
+        display: block;
+        width: 30%;
+        height: 100%;
+        background: #8ab4f8;
+        animation: loadBar 1.2s ease infinite;
+      }
+      @keyframes loadBar {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(400%); }
       }
     </style>
   </head>
@@ -879,70 +917,24 @@
     </div>
 
     <section class="browser-shell" id="browserShell">
-      <div class="browser-topbar">
+      <div class="browser-tabstrip" id="tabStrip">
+        <div class="tab-scroll" id="tabScroll"></div>
+        <button class="tab-add" id="newTabBtn" type="button" aria-label="New tab">+</button>
+      </div>
+      <div class="browser-toolbar">
         <div class="browser-nav-group">
-          <button
-            class="browser-nav-btn"
-            id="backBtn"
-            type="button"
-            aria-label="Go back"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-              <path
-                fill="currentColor"
-                d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"
-              />
-              <path
-                fill="currentColor"
-                d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
-              />
-            </svg>
+          <button class="browser-nav-btn" id="backBtn" type="button" aria-label="Back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
           </button>
-          <button
-            class="browser-nav-btn"
-            id="forwardBtn"
-            type="button"
-            aria-label="Go forward"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 64 64"
-              stroke-width="2.5"
-              stroke="currentColor"
-              fill="none"
-            >
-              <line x1="55.78" y1="32.63" x2="10.33" y2="32.63" />
-              <polyline points="38.55 14.63 55.78 32.79 38.55 49.32" />
-            </svg>
+          <button class="browser-nav-btn" id="forwardBtn" type="button" aria-label="Forward">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
           </button>
-          <button
-            class="browser-nav-btn"
-            id="reloadBtn"
-            type="button"
-            aria-label="Reload"
-          >
-            ↻
+          <button class="browser-nav-btn" id="reloadBtn" type="button" aria-label="Reload">
+            <svg class="reload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+            <svg class="stop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
           </button>
         </div>
-        <div class="tab-strip" id="tabStrip">
-          <button
-            class="tab-add"
-            id="newTabBtn"
-            type="button"
-            aria-label="Open new tab"
-          >
-            +
-          </button>
-        </div>
-        <div class="browser-controls">
-          <input
-            class="browser-address-bar"
-            id="addressBar"
-            type="text"
-            placeholder="Search Google or enter website URL"
-            autocomplete="off"
-          />
-        </div>
+        <input class="browser-address-bar" id="addressBar" type="text" placeholder="Search Google or enter a URL" autocomplete="off" />
       </div>
       <div class="browser-panels" id="browserPanels"></div>
     </section>
@@ -961,6 +953,7 @@
         const workspaceApp = document.getElementById("workspaceApp");
         const browserShell = document.getElementById("browserShell");
         const tabStrip = document.getElementById("tabStrip");
+        const tabScroll = document.getElementById("tabScroll");
         const browserPanels = document.getElementById("browserPanels");
         const newTabBtn = document.getElementById("newTabBtn");
         const addressBar = document.getElementById("addressBar");
@@ -1152,6 +1145,10 @@
           forwardBtn.disabled = !hasActiveTab || !activeTab?.canGoForward;
           reloadBtn.disabled = !hasActiveTab;
           addressBar.disabled = !hasActiveTab;
+          const loading = activeTab?.isLoading || false;
+          reloadBtn.querySelector(".reload-icon").style.display = loading ? "none" : "";
+          reloadBtn.querySelector(".stop-icon").style.display = loading ? "" : "none";
+          reloadBtn.setAttribute("aria-label", loading ? "Stop" : "Reload");
         }
         function navigateActiveTab(rawInput) {
           const activeTab = getActiveTab();
@@ -1160,21 +1157,23 @@
           activeTab.pendingInput = "";
           activeTab.title = "Loading...";
           activeTab.iconText = getTabIconText(nextUrl);
+          activeTab.isLoading = true;
+          activeTab.loadingDiv.classList.remove("hidden");
           activeTab.webview.src = nextUrl;
           activeTab.emptyState.classList.add("hidden");
           activeTab.webview.classList.remove("hidden");
           addressBar.value = nextUrl;
           renderBrowserTabs();
+          updateNavButtons();
         }
 
         function renderBrowserTabs() {
-          document
-            .querySelectorAll(".browser-tab")
-            .forEach((el) => el.remove());
+          tabScroll.innerHTML = "";
           browserTabs.forEach((tab) => {
             const tabButton = document.createElement("button");
             tabButton.type = "button";
-            tabButton.className = `browser-tab${tab.id === activeTabId ? " active" : ""}`;
+            let cls = `browser-tab${tab.id === activeTabId ? " active" : ""}`;
+            tabButton.className = cls;
             const favicon = document.createElement("span");
             favicon.className = "tab-favicon";
             favicon.textContent = tab.iconText || "W";
@@ -1194,7 +1193,7 @@
               e.stopPropagation();
               closeBrowserTab(tab.id);
             });
-            tabStrip.insertBefore(tabButton, newTabBtn);
+            tabScroll.appendChild(tabButton);
           });
         }
         function activateBrowserTab(tabId) {
@@ -1209,7 +1208,7 @@
           updateAddressBar();
           updateNavButtons();
         }
-        function createBrowserTab() {
+        function createBrowserTab(urlToNavigate) {
           const tabId = nextTabId++;
           const panel = document.createElement("div");
           panel.className = "browser-panel";
@@ -1217,6 +1216,8 @@
           const emptyState = document.createElement("div");
           emptyState.className = "browser-empty-state";
           emptyState.innerHTML = `<div class="browser-empty-card"><div class="browser-empty-title">New Tab</div><div class="browser-empty-copy">Enter the website URL in the address bar, or type anything and press Enter to open the search results.</div></div>`;
+          const loadingDiv = document.createElement("div");
+          loadingDiv.className = "browser-loading hidden";
           const webview = document.createElement("webview");
           webview.className = "browser-webview hidden";
           webview.setAttribute("allowpopups", "");
@@ -1224,6 +1225,7 @@
           webview.setAttribute("useragent", navigator.userAgent);
           webview.setAttribute("disableblinkfeatures", "WebAuthn");
           panel.appendChild(emptyState);
+          panel.appendChild(loadingDiv);
           panel.appendChild(webview);
           browserPanels.appendChild(panel);
           const syncTabState = () => {
@@ -1237,14 +1239,44 @@
               updateNavButtons();
             }
           };
+          const showLoading = () => {
+            if (!tab.url) return;
+            tab.isLoading = true;
+            loadingDiv.classList.remove("hidden");
+            updateNavButtons();
+            renderBrowserTabs();
+          };
+          const hideLoading = () => {
+            tab.isLoading = false;
+            loadingDiv.classList.add("hidden");
+            updateNavButtons();
+            renderBrowserTabs();
+          };
+          webview.addEventListener("did-start-loading", showLoading);
+          webview.addEventListener("did-stop-loading", () => {
+            hideLoading();
+            syncTabState();
+          });
+          webview.addEventListener("did-navigate", syncTabState);
+          webview.addEventListener("new-window", (e) => {
+            e.preventDefault();
+            const url = e.url || "";
+            if (url) {
+              createBrowserTab(url);
+            }
+          });
           webview.addEventListener("page-title-updated", (e) => {
             tab.title = e.title || "New Tab";
             renderBrowserTabs();
           });
-          webview.addEventListener("did-stop-loading", syncTabState);
-          webview.addEventListener("did-navigate", syncTabState);
+          webview.addEventListener("console-message", (e) => {
+            if (e.message.startsWith("__NEW_TAB__:")) {
+              const url = e.message.slice("__NEW_TAB__:".length);
+              if (url) createBrowserTab(url);
+            }
+          });
           webview.addEventListener("dom-ready", () => {
-            webview.executeJavaScript(`
+            const injection = `
               try {
                 Object.defineProperty(navigator, 'credentials', {
                   get() { return undefined; },
@@ -1252,7 +1284,24 @@
                   enumerable: true
                 });
               } catch(e) {}
-            `);
+              try {
+                var _origOpen = window.open;
+                window.open = function(url) {
+                  if (url) console.log('__NEW_TAB__:' + url);
+                  return null;
+                };
+                document.addEventListener('click', function(e) {
+                  for (var t = e.target; t; t = t.parentElement) {
+                    if (t.tagName === 'A' && t.target === '_blank' && t.href) {
+                      e.preventDefault();
+                      console.log('__NEW_TAB__:' + t.href);
+                      break;
+                    }
+                  }
+                }, true);
+              } catch(e) {}
+            `;
+            webview.executeJavaScript(injection);
           });
           const tab = {
             id: tabId,
@@ -1261,13 +1310,24 @@
             pendingInput: "",
             canGoBack: false,
             canGoForward: false,
+            isLoading: false,
             iconText: "N",
             panel,
             webview,
             emptyState,
+            loadingDiv,
           };
           browserTabs.push(tab);
           activateBrowserTab(tabId);
+          if (urlToNavigate) {
+            emptyState.style.display = "none";
+            webview.classList.remove("hidden");
+            tab.isLoading = true;
+            loadingDiv.classList.remove("hidden");
+            renderBrowserTabs();
+            updateNavButtons();
+            webview.src = urlToNavigate;
+          }
         }
         function closeBrowserTab(tabId) {
           const idx = browserTabs.findIndex((t) => t.id === tabId);
@@ -1304,6 +1364,22 @@
         chatInput.addEventListener("input", autoResizeTextarea);
         newChatBtn.addEventListener("click", newChat);
         newTabBtn.addEventListener("click", createBrowserTab);
+        document.addEventListener("keydown", (e) => {
+          if (e.ctrlKey || e.metaKey) {
+            if (e.key === "t") {
+              e.preventDefault();
+              createBrowserTab();
+            } else if (e.key === "w") {
+              e.preventDefault();
+              const tab = getActiveTab();
+              if (tab) closeBrowserTab(tab.id);
+            } else if (e.key === "l") {
+              e.preventDefault();
+              addressBar.focus();
+              addressBar.select();
+            }
+          }
+        });
         addressBar.addEventListener("keydown", (e) => {
           if (e.key === "Enter") {
             e.preventDefault();
@@ -1321,8 +1397,16 @@
         reloadBtn.addEventListener("click", () => {
           const tab = getActiveTab();
           if (!tab) return;
-          if (!tab.url) navigateActiveTab(browserHomeUrl);
-          else tab.webview.reload();
+          if (tab.isLoading) {
+            tab.webview.stop();
+            tab.isLoading = false;
+            tab.loadingDiv.classList.add("hidden");
+            updateNavButtons();
+          } else if (!tab.url) {
+            navigateActiveTab(browserHomeUrl);
+          } else {
+            tab.webview.reload();
+          }
         });
         historyItems.forEach((item) =>
           item.addEventListener("click", () => {
