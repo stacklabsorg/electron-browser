@@ -44,7 +44,7 @@ app.whenReady().then(() => {
   });
 
   setTimeout(() => {
-    const success = globalShortcut.register("CommandOrControl+Space", () => {
+    const success = globalShortcut.register("CommandOrControl+Tab", () => {
       if (!win) return;
 
       isFB = !isFB;

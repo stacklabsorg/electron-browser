@@ -477,12 +477,13 @@
         align-items: flex-end;
         gap: 2px;
         overflow-x: auto;
-        flex: 1;
         min-width: 0;
         height: 40px;
         scrollbar-width: none;
       }
-      .tab-scroll::-webkit-scrollbar { display: none; }
+      .tab-scroll::-webkit-scrollbar {
+        display: none;
+      }
 
       .browser-tab {
         min-width: 140px;
@@ -734,7 +735,7 @@
         display: none;
       }
       .browser-loading::after {
-        content: '';
+        content: "";
         display: block;
         width: 30%;
         height: 100%;
@@ -742,8 +743,12 @@
         animation: loadBar 1.2s ease infinite;
       }
       @keyframes loadBar {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(400%); }
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(400%);
+        }
       }
     </style>
   </head>
@@ -919,22 +924,94 @@
     <section class="browser-shell" id="browserShell">
       <div class="browser-tabstrip" id="tabStrip">
         <div class="tab-scroll" id="tabScroll"></div>
-        <button class="tab-add" id="newTabBtn" type="button" aria-label="New tab">+</button>
+        <button
+          class="tab-add"
+          id="newTabBtn"
+          type="button"
+          aria-label="New tab"
+        >
+          +
+        </button>
       </div>
       <div class="browser-toolbar">
         <div class="browser-nav-group">
-          <button class="browser-nav-btn" id="backBtn" type="button" aria-label="Back">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+          <button
+            class="browser-nav-btn"
+            id="backBtn"
+            type="button"
+            aria-label="Back"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M19 12H5" />
+              <path d="M12 19l-7-7 7-7" />
+            </svg>
           </button>
-          <button class="browser-nav-btn" id="forwardBtn" type="button" aria-label="Forward">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          <button
+            class="browser-nav-btn"
+            id="forwardBtn"
+            type="button"
+            aria-label="Forward"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="M12 5l7 7-7 7" />
+            </svg>
           </button>
-          <button class="browser-nav-btn" id="reloadBtn" type="button" aria-label="Reload">
-            <svg class="reload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
-            <svg class="stop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+          <button
+            class="browser-nav-btn"
+            id="reloadBtn"
+            type="button"
+            aria-label="Reload"
+          >
+            <svg
+              class="reload-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"
+              />
+            </svg>
+            <svg
+              class="stop-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="display: none"
+            >
+              <path d="M18 6L6 18" />
+              <path d="M6 6l12 12" />
+            </svg>
           </button>
         </div>
-        <input class="browser-address-bar" id="addressBar" type="text" placeholder="Search Google or enter a URL" autocomplete="off" />
+        <input
+          class="browser-address-bar"
+          id="addressBar"
+          type="text"
+          placeholder="Search Google or enter a URL"
+          autocomplete="off"
+        />
       </div>
       <div class="browser-panels" id="browserPanels"></div>
     </section>
@@ -1146,8 +1223,12 @@
           reloadBtn.disabled = !hasActiveTab;
           addressBar.disabled = !hasActiveTab;
           const loading = activeTab?.isLoading || false;
-          reloadBtn.querySelector(".reload-icon").style.display = loading ? "none" : "";
-          reloadBtn.querySelector(".stop-icon").style.display = loading ? "" : "none";
+          reloadBtn.querySelector(".reload-icon").style.display = loading
+            ? "none"
+            : "";
+          reloadBtn.querySelector(".stop-icon").style.display = loading
+            ? ""
+            : "none";
           reloadBtn.setAttribute("aria-label", loading ? "Stop" : "Reload");
         }
         function navigateActiveTab(rawInput) {
@@ -1363,7 +1444,9 @@
         });
         chatInput.addEventListener("input", autoResizeTextarea);
         newChatBtn.addEventListener("click", newChat);
-        newTabBtn.addEventListener("click", createBrowserTab);
+        newTabBtn.addEventListener("click", () => {
+          createBrowserTab();
+        });
         document.addEventListener("keydown", (e) => {
           if (e.ctrlKey || e.metaKey) {
             if (e.key === "t") {
